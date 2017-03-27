@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1, minimum-scale=1,user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>一株佛心莲花，寄予思念</title>
+	<embed src="" type="">
+	<link rel="stylesheet" href="css/index.css">
+	<script src="js/flexible.js"></script>
+	<script src="js/jquery.js"></script>
+	<script src="js/fastclick.js"></script>
+	<script src="js/wnl-util.js"></script>
+	<script src="js/index.js"></script>
+</head>
+<body>
+	<div class="index page1">
+		<div class="center"></div>    
+		<div class="btn">
+			<button class="plant"></button>			
+		</div>    
+		<div class="foot"></div>   
+	</div>    
+
+	 <div class="index page2 hidden">
+		<div class="top">
+			您种下了第<span class="num">68756</span>株佛心莲
+		</div>
+		<div class="des">千灯万盏，不如心灯一盏。</div>	 
+		
+		<div class="center"></div>
+		<div class="bottom">
+			<div class="title">佛曰：</div>
+			<div class="text p1">每个人所见所遇到的都早有安排，一切都是缘。缘起缘灭，缘聚缘散，一切都是天意。</div>
+		</div>	
+		<div class="btns">
+			<button class="again"></button>
+			<button class="share"></button>
+		</div>  
+		<div class="foot"></div>    
+		<div class="weixin hidden">
+			<div class="qr"></div>
+			<div class="ad">广告</div>			
+		</div>
+	</div> 
+
+
+
+
+
+
+	<div class="showShareMask hidden">
+  		<div class="shareArrow"></div>
+  	</div>
+	<!-- wnl share tool -->
+	<div class="sharemask hidden"></div>
+  	<div class="wnl-sharetool hidden">
+  	   <div class="platform">
+  		   <label class="weixin">微信</label>
+  		   <label class="weixin_circle">朋友圈</label>
+  		   <label class="qq">QQ</label>
+  		   <label class="weibo">新浪微博</label>
+  	   </div>
+  	   <div class="cancle-share">取消分享</div>
+  	</div>
+
+	<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script>
+			$.ajax({
+				url: "https://b.cqyouloft.com/interface/API/weixinhandler.ashx",
+				type: "get",
+				data: {
+					requesturl: location.href
+				},
+				success: function(result) {
+					result = JSON.parse(result);
+					wx.config({
+						debug: false,
+						appId: 'wx347ab26567c5465f', // 必填，公众号的唯一标识
+						timestamp: result.timestamp, // 必填，生成签名的时间戳
+						nonceStr: result.nonceStr, // 必填，生成签名的随机串
+						signature: result.signature, // 必填，签名，见附录1
+						jsApiList: [
+								'onMenuShareTimeline',
+								'onMenuShareAppMessage',
+								'onMenuShareQQ',
+								'onMenuShareWeibo'
+							] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+					});
+				}
+			});
+		</script>
+</body>
+</html>
