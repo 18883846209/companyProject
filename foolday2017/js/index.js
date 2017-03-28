@@ -46,6 +46,9 @@ var shareOB = window.share,shareImage,sharePic = getQueryString('sharePic');
 
 $(function() {
 	 FastClick.attach(document.body);
+	//  WNLUtil.isIOS ? (_czc.push(['_trackEvent', 'foolday2017_flink_ios', 'click']),
+	// 	location.href = 'https://b.cqyouloft.com/foolday2017/index.html') : WNLUtil.isAndroid && (_czc.push(['_trackEvent', 'foolday2017_flink_android', 'click']),
+	// 	location.href = 'http://b.cqyouloft.com/foolday2017/index.html');
 	//页面访问埋点
 	if (WNLUtil.isWeixin) {
 		if (WNLUtil.isIOS) {
@@ -85,7 +88,9 @@ $(function() {
 		$('.home').removeClass('hidden');
 		$('.showluck').addClass('hidden');
 		$('.home').click(function() {
-			window.location.href = 'https://b.cqyouloft.com/foolday2017/index.html';
+			WNLUtil.isIOS ? (_czc.push(['_trackEvent', 'foolday2017_flink_ios', 'click']),
+			location.href = 'https://b.cqyouloft.com/foolday2017/index.html') : WNLUtil.isAndroid && (_czc.push(['_trackEvent', 'foolday2017_flink_android', 'click']),
+			location.href = 'https://b.cqyouloft.com/foolday2017/index.html');
 			//分享页面进入首页埋点
 			if (WNLUtil.isWeixin) {
 				if (WNLUtil.isIOS) {
@@ -131,6 +136,9 @@ $(function() {
 		$('.page2').removeClass('hidden');
 		$('.light').removeClass('imglight');
 		var labelimg = new Image();
+		// WNLUtil.isIOS ?
+		// labelimg.src = 'https://b.cqyouloft.com/foolday2017/index.html' + getArr()[Math.floor(Math.random()*6)] + '.jpg' : WNLUtil.isAndroid,
+		// labelimg.src = 'http://b.cqyouloft.com/foolday2017/index.html' + getArr()[Math.floor(Math.random()*6)] + '.jpg';
 		labelimg.src = 'https://b.cqyouloft.com/foolday2017/img/' + getArr()[Math.floor(Math.random()*6)] + '.jpg';
 		imgnum = labelimg.src.substring(labelimg.src.length-5,labelimg.src.length-4);
 		$('.page2').find('.label').append(labelimg);
@@ -170,9 +178,12 @@ $(function() {
 
 		shareImage=labelimg.src;
 		shareOB=shareImage;
-		share.title = '查看我的隐藏神兽属相';
+		share.title = '厉害了我的神兽！快来查看你的隐藏属相';
 		share.friendTitle = '我的隐藏神兽属相居然是这个！';
 		share.desc = '这个神兽属性厉害了，快来测！';
+		// WNLUtil.isIOS ?
+		// share.link = 'https://b.cqyouloft.com/foolday2017/index.html?sharePic=https://b.cqyouloft.com/foolday2017/img/'+ imgnum +'.jpg' : WNLUtil.isAndroid,
+		// share.link = 'http://b.cqyouloft.com/foolday2017/index.html?sharePic=https://b.cqyouloft.com/foolday2017/img/'+ imgnum +'.jpg';
 		share.link = 'https://b.cqyouloft.com/foolday2017/index.html?sharePic=https://b.cqyouloft.com/foolday2017/img/'+ imgnum +'.jpg';
 		setShareInfo();
 	});
@@ -277,7 +288,6 @@ function setShareInfo() {
 		imgUrl: share.imgUrl, // 分享图标
 		success: function () {
 			// 用户确认分享后执行的回调函数
-			$('.showShareMask').addClass('hidden');//自定义分享后的函数及页面状态
 			_czc.push(['_trackEvent', 'foolday2017_wxshare_timeline', 'click']);//统计分享次数，后台可查看
 		},
 		cancel: function () {

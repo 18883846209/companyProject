@@ -208,7 +208,8 @@ body,html {
 .platform {
     padding: .6rem .15rem 0;
     width: 100%;
-    height: 2.8rem
+    height: 2.8rem;
+    box-sizing: border-box;
 }
 
 .platform label {
@@ -279,5 +280,5 @@ body,html {
     text-align: center;
     font-size: .36rem;
     color: #666;
-    border-top: 1px solid #eaeaea
+    border-top: 1px solid #eaeaea;
 }
