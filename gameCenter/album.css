@@ -37,7 +37,7 @@ body,html {
 .game {
     background: url(./img/card@2x.png) no-repeat;
     background-size: 6.88rem 4.28rem;
-    background-position: 50%;
+    background-position: 50% -2px;
     width: 6.88rem;
     margin: 0 auto 0.4rem;
     height: 4.28rem;

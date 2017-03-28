@@ -1,29 +1,42 @@
 
 window.share = {
 	title : '2017最火游戏！不能不玩的游戏合集！',//设置分享的题目
-	friendTitle : '2017最热门的在线手机游戏！占领排行榜的超热门！',//分享之后显示的题目
+	friendTitle : '2017最热门的在线手机游戏！',//分享之后显示的题目
 	link : 'https://b.cqyouloft.com/gamecenter/album.html?share=1',//分享链接
 	imgUrl : 'https://b.cqyouloft.com/gamecenter/img/share.jpg',//图片的链接
-	desc : '快来一起参加吧！'//附加的描述信息
+	desc : '占领排行榜的超热门！不玩你就亏大了！'//附加的描述信息
 };
 var shareOB = window.share,shareImage;
 
 $(function() {
     FastClick.attach(document.body);
-    $('.cqimg').click(function(){
-        window.location.href = "http://www.51wnl.com/gamecenter/game.html?gamelink=http://api.egret-labs.org/v2/game/22258/91159&gamelandscape=false";
+	WNLUtil.isIOS ? location.href = 'https://b.cqyouloft.com/gamecenter/album.html&ios_zt=1' : WNLUtil.isAndroid,
+	location.href = 'https://b.cqyouloft.com/gamecenter/album.html';
+    
+	$('.cqimg,.chuanqi').click(function(){
+		WNLUtil.isIOS ? location.href = 'http://www.51wnl.com/gamecenter/index.html#/detail/135&ios_zt=1' : WNLUtil.isAndroid,
+		location.href = 'http://www.51wnl.com/gamecenter/index.html#/detail/135';
+        // window.location.href = "http://www.51wnl.com/gamecenter/index.html#/detail/135";
     });
-    $('.ssimg').click(function(){
-        window.location.href = "http://www.51wnl.com/gamecenter/game.html?gamelink=http://api.egret-labs.org/v2/game/22258/90804&gamelandscape=false";
+    $('.ssimg,.shengshi').click(function(){
+		WNLUtil.isIOS ? location.href = 'http://www.51wnl.com/gamecenter/index.html#/detail/141&ios_zt=1' : WNLUtil.isAndroid,
+		location.href = 'http://www.51wnl.com/gamecenter/index.html#/detail/141';
+        // window.location.href = "http://www.51wnl.com/gamecenter/index.html#/detail/141";
     })
-    $('.hcimg').click(function(){
-        window.location.href = "http://www.51wnl.com/gamecenter/game.html?gamelink=http://open966.open.7724.com/hc/game?flag=open966";
+    $('.hcimg,.huancheng').click(function(){
+		WNLUtil.isIOS ? location.href = 'http://www.51wnl.com/gamecenter/index.html#/detail/334&ios_zt=1' : WNLUtil.isAndroid,
+		location.href = 'http://www.51wnl.com/gamecenter/index.html#/detail/334';
+        //window.location.href = "http://www.51wnl.com/gamecenter/index.html#/detail/334";
     })
-    $('.lmimg').click(function(){
-        window.location.href = "http://www.51wnl.com/gamecenter/game.html?gamelink=http://open966.open.7724.com/lmybl/game?flag=open966&gamelandscape=false";
+    $('.lmimg,.lianmeng').click(function(){
+		WNLUtil.isIOS ? location.href = 'http://www.51wnl.com/gamecenter/index.html#/detail/182&ios_zt=1' : WNLUtil.isAndroid,
+		location.href = 'http://www.51wnl.com/gamecenter/index.html#/detail/182';
+        //window.location.href = "http://www.51wnl.com/gamecenter/index.html#/detail/182";
     })
-    $('.kdimg').click(function(){
-        window.location.href = "http://www.51wnl.com/gamecenter/game.html?gamelink=http://open966.open.7724.com/kdygdsb/game?flag=open966&gamelandscape=false";
+    $('.kdimg,.koudai').click(function(){
+		WNLUtil.isIOS ? location.href = 'http://www.51wnl.com/gamecenter/index.html#/detail/190&ios_zt=1' : WNLUtil.isAndroid,
+		location.href = 'http://www.51wnl.com/gamecenter/index.html#/detail/190';
+        //window.location.href = "http://www.51wnl.com/gamecenter/index.html#/detail/190";
     })
 
 	//万年历分享工具设置
