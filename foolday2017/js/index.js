@@ -1,13 +1,26 @@
 //触摸设备上的长按事件
-$.fn.longTouch = function(obj) {
-	for(var timer,i = 0,_this = this; i < _this.length; i ++) {
-		_this[i].addEventListener('touchstart', function() {
-			timer = setTimeout(obj, 800);
+// $.fn.longTouch = function(obj) {
+// 	for(var timer,i = 0,_this = this; i < _this.length; i ++) {
+// 		_this[i].addEventListener('touchstart', function() {
+// 			timer = setTimeout(obj, 800);
+// 			$('.again,.share').prop('checked','true');
+// 		}, false);
+// 		_this[i].addEventListener('touchend', function() {
+// 			timer = clearTimeout(timer);
+// 			$('.again,.share').prop('checked','false');
+// 		}, false);
+// 	}
+// };
+$.fn.longTouch = function(e) {
+	for (var t = void 0, a = this, i = 0; i < a.length; i++)
+		a[i].addEventListener('touchstart', function() {
+			t = setTimeout(e, 800);
+			$('.again,.share').prop('checked','true');
+		}, false),
+		a[i].addEventListener('touchend', function() {
+			clearTimeout(t);
+			$('.again,.share').prop('checked','false');
 		}, false);
-		_this[i].addEventListener('touchend', function() {
-			timer = clearTimeout(timer);
-		}, false);
-	}
 };
 
 //获取字符串
@@ -56,14 +69,14 @@ $(function() {
 		}else if (WNLUtil.isAndroid) {
 			_czc.push(['_trackEvent','foolday2017_take_wx', 'view', 'az']);
 		}
-		}else if (WNLUtil.isWnl) {
-			if (WNLUtil.isIOS) {
-				_czc.push(['_trackEvent','foolday2017_take_wnl', 'view', 'ios']);
-			}else if (WNLUtil.isAndroid) {
-				_czc.push(['_trackEvent','foolday2017_take_wnl_az', 'view', 'az']);
-			}
-			$('.showluck').removeClass('hidden');
+	}else if (WNLUtil.isWnl) {
+		if (WNLUtil.isIOS) {
+			_czc.push(['_trackEvent','foolday2017_take_wnl', 'view', 'ios']);
+		}else if (WNLUtil.isAndroid) {
+			_czc.push(['_trackEvent','foolday2017_take_wnl_az', 'view', 'az']);
 		}
+		$('.showluck').removeClass('hidden');
+	}
 
 	if (sharePic) {
 		//分享成功埋点
