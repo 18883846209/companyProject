@@ -1,29 +1,29 @@
 
 window.share = {
-	title : '热门游戏推荐',//设置分享的题目
+	title : '2017最火游戏！不能不玩的游戏合集！',//设置分享的题目
 	friendTitle : '2017最热门的在线手机游戏！占领排行榜的超热门！',//分享之后显示的题目
 	link : 'https://b.cqyouloft.com/gamecenter/album.html?share=1',//分享链接
 	imgUrl : 'https://b.cqyouloft.com/gamecenter/img/share.jpg',//图片的链接
-	desc : '2017最火游戏！不能不玩的游戏合集！'//附加的描述信息
+	desc : '快来一起参加吧！'//附加的描述信息
 };
 var shareOB = window.share,shareImage;
 
 $(function() {
-     FastClick.attach(document.body);
+    FastClick.attach(document.body);
     $('.cqimg').click(function(){
-        window.location.href = "www.51wnl.com/gamecenter/index.html#/detail/331";
+        window.location.href = "http://www.51wnl.com/gamecenter/game.html?gamelink=http://api.egret-labs.org/v2/game/22258/91159&gamelandscape=false";
     });
     $('.ssimg').click(function(){
-        window.location.href = "http://www.51wnl.com/gamecenter/index.html#/detail/141";
+        window.location.href = "http://www.51wnl.com/gamecenter/game.html?gamelink=http://api.egret-labs.org/v2/game/22258/90804&gamelandscape=false";
     })
     $('.hcimg').click(function(){
-        window.location.href = "http://www.51wnl.com/gamecenter/index.html#/detail/273";
+        window.location.href = "http://www.51wnl.com/gamecenter/game.html?gamelink=http://open966.open.7724.com/hc/game?flag=open966";
     })
     $('.lmimg').click(function(){
-        window.location.href = "http://www.51wnl.com/gamecenter/index.html#/detail/181";
+        window.location.href = "http://www.51wnl.com/gamecenter/game.html?gamelink=http://open966.open.7724.com/lmybl/game?flag=open966&gamelandscape=false";
     })
     $('.kdimg').click(function(){
-        window.location.href = "http://www.51wnl.com/gamecenter/index.html#/detail/189";
+        window.location.href = "http://www.51wnl.com/gamecenter/game.html?gamelink=http://open966.open.7724.com/kdygdsb/game?flag=open966&gamelandscape=false";
     })
 
 	//万年历分享工具设置
