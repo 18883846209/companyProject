@@ -10,32 +10,51 @@ var shareOB = window.share,shareImage;
 
 $(function() {
     FastClick.attach(document.body);
-	WNLUtil.isIOS ? location.href = 'https://b.cqyouloft.com/gamecenter/album.html&ios_zt=1' : WNLUtil.isAndroid,
-	location.href = 'https://b.cqyouloft.com/gamecenter/album.html';
+	// WNLUtil.isIOS ? location.href = 'https://b.cqyouloft.com/gamecenter/album.html&ios_zt=1' : WNLUtil.isAndroid,
+	// location.href = 'https://b.cqyouloft.com/gamecenter/album.html';
     
 	$('.cqimg,.chuanqi').click(function(){
-		WNLUtil.isIOS ? location.href = 'http://www.51wnl.com/gamecenter/index.html#/detail/135&ios_zt=1' : WNLUtil.isAndroid,
-		location.href = 'http://www.51wnl.com/gamecenter/index.html#/detail/135';
+		if(WNLUtil.isAndroid) {
+			location.href = 'http://www.51wnl.com/gamecentertest/index.html#/detail/135'
+		}else if(WNLUtil.isIOS) {
+			location.href = 'http://www.51wnl.com/gamecentertest/index.html#/detail/48?ios_zt=1'
+		}
         // window.location.href = "http://www.51wnl.com/gamecenter/index.html#/detail/135";
     });
+
     $('.ssimg,.shengshi').click(function(){
-		WNLUtil.isIOS ? location.href = 'http://www.51wnl.com/gamecenter/index.html#/detail/141&ios_zt=1' : WNLUtil.isAndroid,
-		location.href = 'http://www.51wnl.com/gamecenter/index.html#/detail/141';
+		if(WNLUtil.isAndroid) {
+			location.href = 'http://www.51wnl.com/gamecentertest/index.html#/detail/141'
+		}else if(WNLUtil.isIOS) {
+			location.href = 'http://www.51wnl.com/gamecentertest/index.html#/detail/54?ios_zt=1'
+		}
         // window.location.href = "http://www.51wnl.com/gamecenter/index.html#/detail/141";
     })
+
     $('.hcimg,.huancheng').click(function(){
-		WNLUtil.isIOS ? location.href = 'http://www.51wnl.com/gamecenter/index.html#/detail/334&ios_zt=1' : WNLUtil.isAndroid,
-		location.href = 'http://www.51wnl.com/gamecenter/index.html#/detail/334';
+		if(WNLUtil.isAndroid) {
+			location.href = 'http://www.51wnl.com/gamecentertest/index.html#/detail/334'
+		}else if(WNLUtil.isIOS) {
+			location.href = 'http://www.51wnl.com/gamecentertest/index.html#/detail/333?ios_zt=1'
+		}
         //window.location.href = "http://www.51wnl.com/gamecenter/index.html#/detail/334";
     })
+
     $('.lmimg,.lianmeng').click(function(){
-		WNLUtil.isIOS ? location.href = 'http://www.51wnl.com/gamecenter/index.html#/detail/182&ios_zt=1' : WNLUtil.isAndroid,
-		location.href = 'http://www.51wnl.com/gamecenter/index.html#/detail/182';
+		if(WNLUtil.isAndroid) {
+			location.href = 'http://www.51wnl.com/gamecentertest/index.html#/detail/182'
+		}else if(WNLUtil.isIOS) {
+			location.href = 'http://www.51wnl.com/gamecentertest/index.html#/detail/181?ios_zt=1'
+		}
         //window.location.href = "http://www.51wnl.com/gamecenter/index.html#/detail/182";
     })
+
     $('.kdimg,.koudai').click(function(){
-		WNLUtil.isIOS ? location.href = 'http://www.51wnl.com/gamecenter/index.html#/detail/190&ios_zt=1' : WNLUtil.isAndroid,
-		location.href = 'http://www.51wnl.com/gamecenter/index.html#/detail/190';
+		if(WNLUtil.isAndroid) {
+			location.href = 'http://www.51wnl.com/gamecentertest/index.html#/detail/190'
+		}else if(WNLUtil.isIOS) {
+			location.href = 'http://www.51wnl.com/gamecentertest/index.html#/detail/189?ios_zt=1'
+		}
         //window.location.href = "http://www.51wnl.com/gamecenter/index.html#/detail/190";
     })
 

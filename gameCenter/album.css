@@ -59,20 +59,22 @@ body,html {
 }
 
 .game .join {
+    position: relative;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-between;
     width: 6.4rem;
     margin: 0.3rem auto;
     color: white;
     font-size: 0.24rem;
     opacity: 0.8;
+    /*background: red;*/
 }
 
 .join span {
-    vertical-align: bottom;
-    float: left;
-    margin-top: 0.04rem;
+    align-items: flex-end; 
 }
 .game a{
-    float: right;
     text-decoration: none;
     color:white;
     font-size: 0.275rem; 
