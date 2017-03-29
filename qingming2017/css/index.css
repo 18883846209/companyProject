@@ -2,8 +2,8 @@ body,html {
 	margin: 0;
 	padding: 0;
 	width: 100%;
-	/*height: 100%;
-    overflow: hidden;*/
+	height: 100%;
+    /*overflow: hidden;*/
     -moz-user-select: none;
     -ms-user-select: none;
     -o-user-select: none;
@@ -14,9 +14,17 @@ body,html {
     display: none;
 }
 @font-face {
-    font-family: FZSXSLKJW-GB1-0;
-    src: url(font.TTF);
+  font-family: 'FZSXSLKJW-GB1-0';
+  src: url('FZSXSLKJW-GB1-0.eot');
+  src:
+    url('FZSXSLKJW-GB1-0.eot?#font-spider') format('embedded-opentype'),
+    url('FZSXSLKJW-GB1-0.ttf') format('truetype'),
+    url('FZSXSLKJW-GB1-0.woff') format('woff'),
+    url('FZSXSLKJW-GB1-0.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
+
 @media screen and (max-width: 320px) {
     body{font-size: 14px;}
 }
@@ -157,6 +165,43 @@ body,html {
     height: 100%;
     overflow: hidden;
 }
+.musicbtn {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 0.6rem;
+    height: 0.6rem;
+    z-index: 99;
+}
+.musicbtn img {
+    width: 0.6rem;
+    height: 0.6rem;
+    text-align: center;
+}
+.circle {
+    animation: yuan 10s infinite;
+    -webkit-animation: yuan 10s infinite;
+}
+@keyframes yuan {
+    0%{
+        transform: rotate(0);
+        -webkit-transform: rotate(0);
+    }
+    100%{
+        transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+    }
+}
+@-webkit-keyframes yuan {
+    0%{
+        transform: rotate(0);
+        -webkit-transform: rotate(0);
+    }
+    100%{
+        transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+    }
+}
 .page1 {
     width: 100%;
     height: 13.34rem;
@@ -164,6 +209,7 @@ body,html {
     background-size: 7.5rem 13.34rem;
     background-position: 50%;
 }
+
 .page1 .rain {
     position: absolute;
     top: 0.2rem;
@@ -318,6 +364,11 @@ body,html {
     font-size: 21px;
     text-align: center;
     color: #2e2e2e;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
     
 }
 
@@ -327,6 +378,11 @@ body,html {
     margin: 0.145rem auto 0.3rem;
     text-align: center;
     color: #2e2e2e;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
 }
 .page2 .bottom {
     margin: 0 auto;
