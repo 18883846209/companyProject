@@ -179,148 +179,131 @@ body,html {
     text-align: center;
 }
 .circle {
-    animation: yuan 10s infinite;
-    -webkit-animation: yuan 10s infinite;
+    animation: spin 10s linear infinite;
+    -webkit-animation: spin 10s linear infinite;
 }
-@keyframes yuan {
-    0%{
-        transform: rotate(0);
-        -webkit-transform: rotate(0);
-    }
-    100%{
-        transform: rotate(360deg);
-        -webkit-transform: rotate(360deg);
+@keyframes spin {
+    to{
+        transform: rotate(1turn);
+        -webkit-transform: rotate(1turn);
     }
 }
-@-webkit-keyframes yuan {
-    0%{
-        transform: rotate(0);
-        -webkit-transform: rotate(0);
-    }
-    100%{
-        transform: rotate(360deg);
-        -webkit-transform: rotate(360deg);
+@-webkit-keyframes spin {
+    to{
+        transform: rotate(1turn);
+        -webkit-transform: rotate(1turn);
     }
 }
 .page1 {
     width: 100%;
-    height: 13.34rem;
+    height: 100%;
     background: url(../img/BG-1@2x.jpg) no-repeat;
     background-size: 7.5rem 13.34rem;
-    background-position: 50%;
+    background-position: 50% top;
 }
 
 .page1 .rain {
     position: absolute;
-    top: 0.2rem;
-    left: 50%;
+    top: 10%;
+    left: 55%;
     width: 0.33rem;
     height: 1.44rem;
     background: url(../img/rain@2x.png) no-repeat;
     background-size: 0.33rem 1.44rem;
     background-position: 50%;
-    /*background-color: red;*/
-    -webkit-animation: down 2.5s cubic-bezier(0.6, 0.04, 0.98, 0.335) infinite;
-    animation: down 2.5s cubic-bezier(0.6, 0.04, 0.98, 0.335) infinite; 
-    /*transition-timing-function: cubic-bezier(0.6, 0.04, 0.98, 0.335);
-    -webkit-transition-timing-function: cubic-bezier(0.6, 0.04, 0.98, 0.335);*/
+    -webkit-animation: down 600ms cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+    animation: down 600ms cubic-bezier(0.645, 0.045, 0.355, 1) infinite; 
 }
 @-webkit-keyframes down {
     0%{
-        top: 0.2rem;
-        left: 50%;
+        top: 10%;
+        left: 55%;
     }
     100%{
-        top: 7rem;
-        left: 5%;
+        top: 60%;
+        left: 30%;
     }
 }
 @keyframes down {
     0%{
-        top: 0.2rem;
+        top: 10%;
         left: 50%;
     }
     100%{
-        top: 7rem;
-        left: 5%;
+        top: 60%;
+        left: 30%;
     }
 }
 .page1 .rain1 {
     position: absolute;
-    top: 0.5rem;
+    top: 20%;
     left: 65%;
     width: 0.5rem;
     height: 1.73rem;
     background: url(../img/rain@3x.png) no-repeat;
     background-size: 0.5rem 1.73rem;
     background-position: 50%;
-    /*background-color: red;*/
-    -webkit-animation: down1 3.5s cubic-bezier(0.6, 0.04, 0.98, 0.335) infinite;
-    animation: down1 3.5s cubic-bezier(0.6, 0.04, 0.98, 0.335) infinite; 
-    /*transition-timing-function: cubic-bezier(0.6, 0.04, 0.98, 0.335);
-    -webkit-transition-timing-function: cubic-bezier(0.6, 0.04, 0.98, 0.335);*/
+    -webkit-animation: down1 800ms cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+    animation: down1 800ms cubic-bezier(0.645, 0.045, 0.355, 1) infinite; 
 }
 @-webkit-keyframes down1 {
     0%{
-        top: 0.5rem;
+        top: 20%;
         left: 65%;
     }
     100%{
-        top: 8rem;
-        left: 10%;
+        top: 70%;
+        left: 43%;
     }
 }
 @keyframes down1 {
     0%{
-        top: 0.5rem;
+        top: 20%;
         left: 65%;
     }
     100%{
-        top: 8rem;
-        left: 10%;
+        top: 70%;
+        left: 43%;
     }
 }
 
 .page1 .rain2 {
     position: absolute;
-    top: 3rem;
+    top: 35%;
     left: 75%;
     width: 0.5rem;
     height: 1.73rem;
     background: url(../img/rain@3x.png) no-repeat;
     background-size: 0.5rem 1.73rem;
     background-position: 50%;
-    /*background-color: red;*/
-    -webkit-animation: down2 4s cubic-bezier(0.6, 0.04, 0.98, 0.335) infinite;
-    animation: down2 4s cubic-bezier(0.6, 0.04, 0.98, 0.335) infinite; 
-    /*transition-timing-function: cubic-bezier(0.6, 0.04, 0.98, 0.335);
-    -webkit-transition-timing-function: cubic-bezier(0.6, 0.04, 0.98, 0.335);*/
+    -webkit-animation: down2 700ms cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+    animation: down2 700ms cubic-bezier(0.645, 0.045, 0.355, 1) infinite; 
 }
 @-webkit-keyframes down2 {
     0%{
-        top: 3rem;
+        top: 35%;
         left: 75%;
     }
     100%{
-        top: 9rem;
-        left: 10%;
+        top: 85%;
+        left: 50%;
     }
 }
 @keyframes down2 {
     0%{
-        top: 3rem;
+        top: 35%;
         left: 75%;
     }
     100%{
-        top: 9rem;
-        left: 10%;
+        top: 85%;
+        left: 50%;
     }
 }
 
 .page1 .center {
     width: 100%;
     height: 7.21rem;
-    margin: 1.19rem auto 2rem;
+    margin: 1.19rem auto 1.19rem;
     background: url(../img/qingming_pic@2x.png) no-repeat;
     background-size: 3.17rem 7.21rem;
     background-position: 50%;
@@ -352,10 +335,10 @@ body,html {
 
 .page2 {
     width: 100%;
-    height: 13.34rem;
+    height: 100%;
     background: url(../img/BG-2@2x.jpg) no-repeat;
     background-size: 7.5rem 13.34rem;
-    background-position: 50%;
+    background-position: 50% top;
 }
 .page2 .top {
     font-family: FZSXSLKJW-GB1-0;
@@ -374,7 +357,7 @@ body,html {
 
 .page2 .des {
     font-family: FZSXSLKJW-GB1-0;
-    width: 4rem;
+    width: 3.9rem;
     margin: 0.145rem auto 0.3rem;
     text-align: center;
     color: #2e2e2e;
@@ -414,7 +397,7 @@ body,html {
     width: 100%;
     height: 0.8rem;
     text-align: center;
-    margin-top: 1.3rem; 
+    margin-top: 0.7rem; 
 }
 .page2 .btns .again {
     width: 2.2rem;
@@ -438,7 +421,7 @@ body,html {
 .page2 .foot {
     width: 100%;
     height: 1.1rem;
-    margin-top: 0.43rem;
+    margin-top: 0.18rem;
     background: url(../img/copyright@2x.png) no-repeat;
     background-size: 2.78rem 1.01rem;
     background-position: 50%;
@@ -448,18 +431,229 @@ body,html {
     text-align: center;
 }
 .page2 .weixin .qr {
-    width: 2.04rem;
-    height: 1.83rem;
-    margin: 0.85rem auto;
-    background: url(../img/QR@2x.png) no-repeat;
-    background-size: 2.04rem 1.83rem;
-    background-position: 50%;
+    width: 2.2rem;
+    margin: 1.2rem auto;
 }
-.page2 .weixin .ad {
+.page2 .weixin .qr .btnwx {
+    width: 2.2rem;
+    height: 0.8rem;
+}
+
+.page2 .weixin .qr .imgwx {
+    width: 2.01rem;
+    height: 0.29rem;
+    margin-top: 0.15rem;
+}
+
+
+.circle2 {
     position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
+    top: 3.8rem;
+    left: 3.5rem;
+    width: 1.5rem;
     height: 1.5rem;
-    background-color: #a7a7a7; 
+    border-radius: 50%;
+    -webkit-border-radius: 50%;    
+    border: 1px solid #fff;
+    z-index: 99;
+    opacity: 0;
+}
+.yq1 {
+    animation: big1 1.4s linear;
+    -webkit-animation: big1 1.4s linear;
+}
+@keyframes big1 {
+    to{
+        transform: scale(2);
+        -webkit-transform: scale(2);
+        opacity: 1;
+    }
+}
+@-webkit-keyframes big1 {
+    to{
+        transform: scale(2);
+        -webkit-transform: scale(2);
+        opacity: 1;
+    }
+}
+
+.yq2 {
+    animation: big2 1.4s linear 0.5s;
+    -webkit-animation: big2 1.4s linear 0.5s;
+}
+@keyframes big2 {
+    to{
+        transform: scale(2);
+        -webkit-transform: scale(2);
+        opacity: 1;
+    }
+}
+@-webkit-keyframes big2 {
+    to{
+        transform: scale(2);
+        -webkit-transform: scale(2);
+        opacity: 1;
+    }
+}
+
+.yq3 {
+    animation: big3 1.4s linear 1s;
+    -webkit-animation: big3 1.4s linear 1s;
+}
+@keyframes big3 {
+    to{
+        transform: scale(2);
+        -webkit-transform: scale(2);
+        opacity: 1;
+    }
+}
+@-webkit-keyframes big3 {
+    to{
+        transform: scale(2);
+        -webkit-transform: scale(2);
+        opacity: 1;
+    }
+}
+
+
+.yq4 {
+    animation: big4 1.4s linear 1.5s;
+    -webkit-animation: big4 1.4s linear 1.5s;
+}
+@keyframes big4 {
+    to{
+        transform: scale(2);
+        -webkit-transform: scale(2);
+        opacity: 1;
+    }
+}
+@-webkit-keyframes big4 {
+    to{
+        transform: scale(2);
+        -webkit-transform: scale(2);
+        opacity: 1;
+    }
+}
+
+
+.yq5 {
+    animation: big5 1.4s linear 2s;
+    -webkit-animation: big5 1.4s linear 2s;
+}
+@keyframes big5 {
+    to{
+        transform: scale(2);
+        -webkit-transform: scale(2);
+        opacity: 1;
+    }
+}
+@-webkit-keyframes big5 {
+    to{
+        transform: scale(2);
+        -webkit-transform: scale(2);
+        opacity: 1;
+    }
+}
+
+.circle3 {
+    position: absolute;
+    top: 3rem;
+    left: 4.5rem;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border: 1px solid #fff;
+    z-index: 99;
+    opacity: 0;
+}
+.yq1x {
+    animation: big1x 1.5s linear;
+    -webkit-animation: big1x 1.5s linear;
+}
+@keyframes big1x {
+    to{
+        transform: scale(2);
+        -webkit-transform: scale(2);
+        opacity: 0.8;
+    }
+}
+@-webkit-keyframes big1x {
+    to{
+        transform: scale(2);
+        -webkit-transform: scale(2);
+        opacity: 0.8;
+    }
+}
+.yq2x {
+    animation: big2x 1.5s linear 0.3s;
+    -webkit-animation: big2x 1.5s linear 0.3s;
+}
+@keyframes big2x {
+    to{
+        transform: scale(2);
+        -webkit-transform: scale(2);
+        opacity: 0.8;
+    }
+}
+@-webkit-keyframes big2x {
+    to{
+        transform: scale(2);
+        -webkit-transform: scale(2);
+        opacity: 0.8;
+    }
+}
+.yq3x {
+    animation: big3x 1.5s linear 0.6s;
+    -webkit-animation: big3x 1.5s linear 0.6s;
+}
+@keyframes big3x {
+    to{
+        transform: scale(2);
+        -webkit-transform: scale(2);
+        opacity: 0.8;
+    }
+}
+@-webkit-keyframes big3x {
+    to{
+        transform: scale(2);
+        -webkit-transform: scale(2);
+        opacity: 0.8;
+    }
+}
+.yq4x {
+    animation: big4x 1.5s linear 0.9s;
+    -webkit-animation: big4x 1.5s linear 0.9s;
+}
+@keyframes big4x {
+    to{
+        transform: scale(2);
+        -webkit-transform: scale(2);
+        opacity: 0.8;
+    }
+}
+@-webkit-keyframes big4x {
+    to{
+        transform: scale(2);
+        -webkit-transform: scale(2);
+        opacity: 0.8;
+    }
+}
+.yq5x {
+    animation: big5x 1.5s linear 1.2s;
+    -webkit-animation: big5x 1.5s linear 1.2s;
+}
+@keyframes big5x {
+    to{
+        transform: scale(2);
+        -webkit-transform: scale(2);
+        opacity: 0.8;
+    }
+}
+@-webkit-keyframes big5x {
+    to{
+        transform: scale(2);
+        -webkit-transform: scale(2);
+        opacity: 0.8;
+    }
 }

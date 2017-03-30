@@ -12,6 +12,16 @@ function unique() {
     return guid;
 }
 
+//获取字符串
+function getQueryString(name) {
+	var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+	var r = window.location.search.substr(1).match(reg);
+	if (r !== null) {
+		return decodeURIComponent(r[2]);
+	}
+	return null;
+}
+
 window.share = {
 	title : '这个清明，一起来种株佛心莲吧。',//设置分享的题目
 	friendTitle : '这个清明，一起来种株佛心莲吧。',//分享之后显示的题目
@@ -19,78 +29,160 @@ window.share = {
 	imgUrl : 'https://b.cqyouloft.com/qingming2017/img/share.jpg',//图片的链接
 	desc : '千灯万盏，不如心灯一盏。'//附加的描述信息
 };
-var shareOB = window.share,shareImage;
+var shareOB = window.share,result = getQueryString('result'),title,content;
 
 $(function() {
 	//alert(localStorage.getItem('masteUser'));
     FastClick.attach(document.body);
 
 	//背景音乐控制
+	function autoPlayMusic() {
+		// 自动播放音乐效果，解决浏览器或者APP自动播放问题
+		function musicInBrowserHandler() {
+			musicPlay(true);
+			document.body.removeEventListener('touchstart', musicInBrowserHandler);
+		}
+		document.body.addEventListener('touchstart', musicInBrowserHandler);
+
+		// 自动播放音乐效果，解决微信自动播放问题
+		function musicInWeixinHandler() {
+			musicPlay(true);
+			document.addEventListener("WeixinJSBridgeReady", function () {
+				musicPlay(true);
+			}, false);
+			document.removeEventListener('DOMContentLoaded', musicInWeixinHandler);
+		}
+		document.addEventListener('DOMContentLoaded', musicInWeixinHandler);
+	}
+	function musicPlay(isPlay) {
+		var audio = document.getElementsByClassName('music')[0];
+		if (isPlay && audio.paused) {
+			audio.play();
+		}
+		if (!isPlay && !audio.paused) {
+			audio.pause();
+		}
+	}
+	autoPlayMusic();
+
+
 	var music = document.getElementsByClassName('music')[0];
 	var musicbtn = document.getElementsByClassName('musicbtn')[0];
 	var img = document.getElementsByTagName('img')[0];
-	music.play();
+	
 	$('img').eq(0).addClass('circle');
 	$('.musicbtn').click(function() {
 		if(music.paused) {
 			music.play();
 			$('img').eq(0).addClass('circle');
-			img.src = 'https://b.cqyouloft.com/qingming2017/img/music_on@2x.png';
+			img.src = './img/music_on@2x.png';
 		}else {
 			$('img').eq(0).removeClass('circle');
 			music.pause();
-			img.src = 'https://b.cqyouloft.com/qingming2017/img/music_off@2x.png';
+			img.src = './img/music_off@2x.png';
 		}
 	})
 	
 
 
 	var userId = unique();
-	localStorage.setItem('masteUser',userId);
-	//区分万年历和微信打开
-	if (WNLUtil.isWeixin) {
-		if (WNLUtil.isIOS) {
-			_czc.push(['_trackEvent','qingming2017_click_wx', 'view', 'ios']);
-		}else if (WNLUtil.isAndroid) {
-			_czc.push(['_trackEvent','qingming2017_click_wx', 'view', 'az']);
-		};
-		$('.page2').find('.btns,.foot').addClass('hidden');
-		$('.page2').find('.weixin').removeClass('hidden');
-	}else if (WNLUtil.isWnl) {
-		if (WNLUtil.isIOS) {
-			_czc.push(['_trackEvent','qingming2017_click_wnl', 'view', 'ios']);
-		}else if (WNLUtil.isAndroid) {
-			_czc.push(['_trackEvent','qingming2017_click_wnl_az', 'view', 'az']);
-		}
-	};
-
+	
+	// //区分万年历和微信打开
+	// if (WNLUtil.isWeixin) {
+	// 	if (WNLUtil.isIOS) {
+	// 		_czc.push(['_trackEvent','qingming2017_click_wx', 'view', 'ios']);
+	// 	}else if (WNLUtil.isAndroid) {
+	// 		_czc.push(['_trackEvent','qingming2017_click_wx', 'view', 'az']);
+	// 	};
+	// 	$('.page2').find('.btns,.foot').addClass('hidden');
+	// 	$('.page2').find('.weixin').removeClass('hidden');
+	// }else if (WNLUtil.isWnl) {
+	// 	if (WNLUtil.isIOS) {
+	// 		_czc.push(['_trackEvent','qingming2017_click_wnl', 'view', 'ios']);
+	// 	}else if (WNLUtil.isAndroid) {
+	// 		_czc.push(['_trackEvent','qingming2017_click_wnl_az', 'view', 'az']);
+	// 	}
+	// };
     var arr = ['每个人所见所遇到的都早有安排，一切都是缘。缘起缘灭，缘聚缘散，一切都是天意。','今生种种皆是前生因果。世间万物皆空。唯其空，便能包容万物。','菩提本非树，明镜亦无台。本来无一物，何处染尘埃。','人生有八苦：生，老，病，死，爱别离，怨长久，求不得，放不下。唯有身心放空，方能人离难，难离身，一切灾殃化为尘。','笑着面对，不去埋怨。悠然，随心，随性，随缘。注定让一生改变的，只在百年后，那一朵花开的时间。'];
-    $('.page1').find('.plant').click(function() {
-		if(localStorage.getItem('masteUser') === userId) {
-			userId = localStorage.getItem('masteUser');
-		} else {
-			userId = unique();
-		}
+    $('.page1').click(function() {
+		// if(localStorage.getItem('masteUser') === userId) {
+		// 	userId = localStorage.getItem('masteUser');
+		// } else {
+		// 	userId = unique();
+		// };
+		$('.yq11').addClass('yq1');
+		$('.yq22').addClass('yq2');
+		$('.yq33').addClass('yq3');
+		$('.yq44').addClass('yq4');
+		$('.yq55').addClass('yq5');	
+
+		$('.yq111').addClass('yq1x');
+		$('.yq222').addClass('yq2x');
+		$('.yq333').addClass('yq3x');
+		$('.yq444').addClass('yq4x');
+		$('.yq555').addClass('yq5x');	
 
         $.ajax({
-            url: 'https://msg.51wnl.com/api/Active/getRank?userid=' + userId,
+            url: 'https://msg.51wnl.com/api/Active/getrank?userid=' + userId,
             type: 'post',
             success: function(response) {
+				//alert(response);
                 var text = $.parseJSON(response);
-                $('.page2').find('.num').text(text['num']);
-				$('.page2').find('.text').text(arr[Math.floor(Math.random()*5+1)]);
-				$('.page1').addClass('hidden');
-				$('.page2').removeClass('hidden');
+				var title = text['num'];
+				var content = Math.floor(Math.random()*5+1);
+                $('.page2').find('.num').text(title);
+				$('.page2').find('.text').text(arr[content]);
+
+				var anim = document.getElementsByClassName('yq55')[0];
+				//var circle3 = document.getElementsByClassName('.circle3')[0];
+				anim.addEventListener('webkitAnimationEnd', function() {
+					$('.page1').fadeOut(800);
+					$('.page2').fadeIn(800);	
+					share.title = '我种下了第'+ $('.page2').find('.num').text() +'株佛心莲，它代表了……';
+					share.friendTitle = '我种下了第'+ $('.page2').find('.num').text() +'株佛心莲';
+					share.desc = '它代表的竟然是……';
+					share.link = 'https://b.cqyouloft.com/qingming2017/index.html?result=1&title=' + title + '&conten=' + content;
+					setShareInfo();
+				})
 			}		
 		})
+
     });
+
+
+	//结果页分享页面
+	if(result) {
+		$('.page1').addClass('hidden');
+		$('.page2').removeClass('hidden')
+		$('.page2').find('.btns,.foot').addClass('hidden');
+		$('.page2').find('.weixin').removeClass('hidden');
+		$('.page2').find('.top').text('我种下了第' + getQueryString('title') + '株佛心莲');
+		$('.page2').find('.text').text(arr[getQueryString('conten')]);
+	}
+
+	//点击我也要种
+	$('.btnwx').click(function() {
+		location.href = 'https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MjM5NTI5OTg0Mw==&scene=110#wechat_redirect';
+	})
 
     //点击再种一株
     $('.page2').find('.again').click(function() {
-        $('.page2').addClass('hidden');
-        $('.page1').removeClass('hidden');
-        //userId = unique();
+		$('.yq11').removeClass('yq1');
+		$('.yq22').removeClass('yq2');
+		$('.yq33').removeClass('yq3');
+		$('.yq44').removeClass('yq4');
+		$('.yq55').removeClass('yq5');
+
+		$('.yq111').removeClass('yq1x');
+		$('.yq222').removeClass('yq2x');
+		$('.yq333').removeClass('yq3x');
+		$('.yq444').removeClass('yq4x');
+		$('.yq555').removeClass('yq5x');
+        $('.page2').fadeOut(800);
+        $('.page1').fadeIn(800);
+        userId = unique();
     });
+
 
     //点击分享
     $('.page2').find('.share').click(function() {
@@ -129,11 +221,7 @@ $(function() {
 					}
 					$('.showShareMask').removeClass('hidden');//移除分享列表
 				};
-			share.title = '我种下了第'+ $('.page2').find('.num').text() +'株佛心莲，它代表了……';
-			share.friendTitle = '我种下了第'+ $('.page2').find('.num').text() +'株佛心莲';
-			share.desc = '它代表的竟然是……';
-			//share.link = '';
-			setShareInfo();
+			
     })
 
     //万年历分享工具设置
