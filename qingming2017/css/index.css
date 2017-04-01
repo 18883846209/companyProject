@@ -163,15 +163,15 @@ body,html {
     top: 0;
     left: 0;
     height: 100%;
-    overflow: hidden;
+    overflow: auto;
 }
 .musicbtn {
-    position: fixed;
-    top: 0;
-    right: 0;
+    position: absolute;
+    top: 0.1rem;
+    right: 0.1rem;
     width: 0.6rem;
     height: 0.6rem;
-    z-index: 99;
+    z-index: 100;
 }
 .musicbtn img {
     width: 0.6rem;
@@ -211,8 +211,8 @@ body,html {
     background: url(../img/rain@2x.png) no-repeat;
     background-size: 0.33rem 1.44rem;
     background-position: 50%;
-    -webkit-animation: down 600ms cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
-    animation: down 600ms cubic-bezier(0.645, 0.045, 0.355, 1) infinite; 
+    -webkit-animation: down 750ms cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+    animation: down 750ms cubic-bezier(0.645, 0.045, 0.355, 1) infinite; 
 }
 @-webkit-keyframes down {
     0%{
@@ -303,7 +303,7 @@ body,html {
 .page1 .center {
     width: 100%;
     height: 7.21rem;
-    margin: 1.19rem auto 1.19rem;
+    margin: 0.75rem auto 0.5rem;
     background: url(../img/qingming_pic@2x.png) no-repeat;
     background-size: 3.17rem 7.21rem;
     background-position: 50%;
@@ -312,7 +312,7 @@ body,html {
     width: 100%;
     height: 0.8rem;
     text-align: center;
-    margin-top: 0.67rem;
+    margin-top: 0.4rem;
 }
 .page1 .btn .plant {
     width: 2.2rem;
@@ -329,7 +329,7 @@ body,html {
     background: url(../img/copyright@2x.png) no-repeat;
     background-size: 2.78rem 1.01rem;
     background-position: 50%;
-    margin-top: 0.43rem;
+    margin-top: 0.4rem;
 }
 
 
@@ -340,10 +340,20 @@ body,html {
     background-size: 7.5rem 13.34rem;
     background-position: 50% top;
 }
+.page2 .top1 {
+    /*position: relative;*/
+    background: url(../img/BG-2@2x.jpg) no-repeat;
+    background-size: 7.5rem 13.34rem;
+    background-position: 50% top;
+    width: 100%;
+    height: 12.3rem;
+    padding-top: 0.5rem;
+    box-sizing: border-box;
+}
 .page2 .top {
     font-family: FZSXSLKJW-GB1-0;
-    width: 5.8rem;
-    margin: 1.05rem auto 0.145rem;
+    width: 6.2rem;
+    margin: 0 auto;
     font-size: 21px;
     text-align: center;
     color: #2e2e2e;
@@ -357,8 +367,8 @@ body,html {
 
 .page2 .des {
     font-family: FZSXSLKJW-GB1-0;
-    width: 3.9rem;
-    margin: 0.145rem auto 0.3rem;
+    width: 4.5rem;
+    margin: 0.139rem auto 0.2rem;
     text-align: center;
     color: #2e2e2e;
     font-weight: normal;
@@ -370,36 +380,72 @@ body,html {
 .page2 .bottom {
     margin: 0 auto;
     width: 6.09rem;
-    height: 1.61rem;
+    height: 2rem;
     font-family: FZSXSLKJW-GB1-0;
     text-align: justify;
     color: #2e2e2e;
 }
 .page2 .bottom .title {
-    margin-bottom: 0.045rem;
+    margin-bottom: 0.039rem;
     font-size: 16px; 
 }
 .page2 .bottom .text {
-    font-size: 18px; 
+    font-size: 0.36rem; 
     text-indent: 0.8rem;
 }
 
 .page2 .center {
     width: 100%;
     height: 5.29rem;
-    margin: 0.07rem auto 0;
+    margin: 0 auto;
     background: url(../img/flower@2x.png) no-repeat;
     background-size: 4.18rem 5.29rem;
     background-position: 50%;
     
 }
-.page2 .btns {
+
+
+.page2 .weixin {
+    width: 100%;
+    height: 2.1rem;
+    text-align: center;
+    z-index: 100;
+    background: url(../img/qrcode.png) no-repeat;
+    background-size: 7.5rem 2.1rem;
+    margin-top: 0.82rem;
+}
+
+.page2 .weixin .qrwx {
+    width: 100%;
+    height: 2.1rem;
+}
+/*.page2 .weixin .qrimg {
+    position: absolute;
+    top: 1.79rem;
+    left: 0;
+    width: 100%;
+    height: 9.86rem;
+}*/
+
+.pagefoot {
+    background: url(../img/footbg@2x.jpg) no-repeat;
+    background-size: 7.5rem 3rem;
+    background-position: 50%;
+    margin-top: -2.9rem;
+    width: 100%;
+    height: 3rem;
+    /*background: #eee;*/
+    z-index: 999;
+    /*padding-top: 0.4rem;*/
+}
+
+.pagefoot .btns {
     width: 100%;
     height: 0.8rem;
-    text-align: center;
-    margin-top: 0.7rem; 
+    text-align: center; 
+    margin-top: 0.3rem;
 }
-.page2 .btns .again {
+.pagefoot .btns .again {
     width: 2.2rem;
     height: 0.8rem;
     background: url('../img/BEN2@2x.png') no-repeat;
@@ -408,7 +454,7 @@ body,html {
     border: none;
     background-color: transparent;
 }
-.page2 .btns .share {
+.pagefoot .btns .share {
     width: 2.2rem;
     height: 0.8rem;
     background: url('../img/BEN3@2x.png') no-repeat;
@@ -416,36 +462,44 @@ body,html {
     background-position: 50%;    
     border: none;
     background-color: transparent;
-    margin-left: 0.3rem;
+    margin-left: 0.6rem;
 }
-.page2 .foot {
+.pagefoot .foot {
     width: 100%;
     height: 1.1rem;
-    margin-top: 0.18rem;
+    margin-top: 0.5rem;
     background: url(../img/copyright@2x.png) no-repeat;
     background-size: 2.78rem 1.01rem;
     background-position: 50%;
 }
-.page2 .weixin {
+
+.imgpage2 {
+    position: absolute;
+    left: 0;
+    top: 0;
     width: 100%;
-    text-align: center;
+    height: 9rem;
+    overflow: hidden;
+    z-index: 99;
+    opacity: 0;
 }
-.page2 .weixin .qr {
-    width: 2.2rem;
-    margin: 1.2rem auto;
-}
-.page2 .weixin .qr .btnwx {
-    width: 2.2rem;
-    height: 0.8rem;
-}
-
-.page2 .weixin .qr .imgwx {
-    width: 2.01rem;
-    height: 0.29rem;
-    margin-top: 0.15rem;
+.imgpage2 img{
+    width: 100%;
+    opacity: 0;
 }
 
-
+.sharepic {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    z-index: 100;
+}
+.sharepic img {
+    width: 100%;
+    opacity: 0;
+}
 .circle2 {
     position: absolute;
     top: 3.8rem;
@@ -657,3 +711,10 @@ body,html {
         opacity: 0.8;
     }
 }
+
+/*.errMsg {
+    position: absolute;
+    top: 5rem;
+    left: 25%;
+    z-index: 999;
+}*/

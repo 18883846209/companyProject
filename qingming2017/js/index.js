@@ -22,6 +22,14 @@ function getQueryString(name) {
 	return null;
 }
 
+//错误信息提示
+function tip(msg) {
+	var node = '<div id="err">' + msg + '</div>';
+	$('body').append(node);
+	$('#err').addClass('errMsg');
+}
+
+
 window.share = {
 	title : '这个清明，一起来种株佛心莲吧。',//设置分享的题目
 	friendTitle : '这个清明，一起来种株佛心莲吧。',//分享之后显示的题目
@@ -34,8 +42,9 @@ var shareOB = window.share,result = getQueryString('result'),title,content;
 $(function() {
 	//alert(localStorage.getItem('masteUser'));
     FastClick.attach(document.body);
-
-	//背景音乐控制
+	$('.page2 .imgpage2').find('img').remove();
+	
+	//背景音乐控制(解决ios端某些机型不能自动播放背景音乐的问题)
 	function autoPlayMusic() {
 		// 自动播放音乐效果，解决浏览器或者APP自动播放问题
 		function musicInBrowserHandler() {
@@ -83,8 +92,6 @@ $(function() {
 		}
 	})
 	
-
-
 	var userId = unique();
 	
 	// //区分万年历和微信打开
@@ -135,16 +142,57 @@ $(function() {
 
 				var anim = document.getElementsByClassName('yq55')[0];
 				//var circle3 = document.getElementsByClassName('.circle3')[0];
-				anim.addEventListener('webkitAnimationEnd', function() {
+				setTimeout(function() {
 					$('.page1').fadeOut(800);
-					$('.page2').fadeIn(800);	
-					share.title = '我种下了第'+ $('.page2').find('.num').text() +'株佛心莲，它代表了……';
-					share.friendTitle = '我种下了第'+ $('.page2').find('.num').text() +'株佛心莲';
-					share.desc = '它代表的竟然是……';
-					share.link = 'https://b.cqyouloft.com/qingming2017/index.html?result=1&title=' + title + '&conten=' + content;
-					setShareInfo();
-				})
-			}		
+					$('.page2').fadeIn(800);
+					setTimeout(function(){
+						var w = $('.top1').width();
+						var h = $('.top1')[0].clientHeight;
+						console.log(w,h);
+						//要将 canvas 的宽高设置成容器宽高的 2 倍
+						var canvas = document.createElement("canvas");  
+						canvas.width = w * 2;
+						canvas.height = h * 2;
+						canvas.style.width = w + "px";
+						canvas.style.height = h + "px";
+						var context = canvas.getContext("2d");
+						//然后将画布缩放，将图像放大两倍画到画布上
+						context.scale(2,2);
+					
+						html2canvas($('.top1'), {
+						canvas:canvas,
+						onrendered: function(canvas) {
+							//document.body.innerHTML='';
+							var dataUrl = canvas.toDataURL("image/png");  
+							console.log(dataUrl);
+							var newImg = document.createElement("img");
+							newImg.src =  dataUrl;
+							newImg.width = w;
+							$.ajax({
+								url: location.protocol + '//msg.51wnl.com/index.php/Asset/ImageLoader/ltt',
+								type: 'POST',
+								data: {"img": dataUrl},
+								dataType: 'JSON',
+								success: function(result){
+									var resultImg = new Image();
+									resultImg.src = result.data.url;
+									resultImg.onload = function(){
+										$('.page2 .imgpage2').append('<img src="'+result.data.url+'" />');
+								
+									};
+									share.title = '我种下了第'+ $('.page2').find('.num').text() +'株佛心莲，它代表了……';
+									share.friendTitle = '我种下了第'+ $('.page2').find('.num').text() +'株佛心莲';
+									share.desc = '它代表的竟然是……';
+									share.link = 'https://b.cqyouloft.com/qingming2017/index.html?result=1&title=' + title + '&conten=' + content+'&pic='+result.data.url;
+									setShareInfo();
+									}
+								});
+							}
+						})
+					},800);	
+					
+				},1000)
+			}	
 		})
 
     });
@@ -152,21 +200,21 @@ $(function() {
 
 	//结果页分享页面
 	if(result) {
-		$('.page1').addClass('hidden');
-		$('.page2').removeClass('hidden')
-		$('.page2').find('.btns,.foot').addClass('hidden');
-		$('.page2').find('.weixin').removeClass('hidden');
+		$('.pagefoot').addClass('hidden');
+		var pic = getQueryString('pic');
+		var picimg = "<img id='sharepic' src='"+ pic +"'>";
+		$('.sharepic').append(picimg);
+		
+		//$('.imgpage2,imgpage2 img').addClass('hidden');
+		//$('.qrwx').removeClass('hidden');
 		$('.page2').find('.top').text('我种下了第' + getQueryString('title') + '株佛心莲');
 		$('.page2').find('.text').text(arr[getQueryString('conten')]);
+		$('.page1').addClass('hidden');
+		$('.page2').removeClass('hidden');
 	}
-
-	//点击我也要种
-	$('.btnwx').click(function() {
-		location.href = 'https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MjM5NTI5OTg0Mw==&scene=110#wechat_redirect';
-	})
-
     //点击再种一株
     $('.page2').find('.again').click(function() {
+		$('.page2 .imgpage2').find('img').remove();
 		$('.yq11').removeClass('yq1');
 		$('.yq22').removeClass('yq2');
 		$('.yq33').removeClass('yq3');
@@ -180,9 +228,13 @@ $(function() {
 		$('.yq555').removeClass('yq5x');
         $('.page2').fadeOut(800);
         $('.page1').fadeIn(800);
-        userId = unique();
+        userId = unique();//重新生成唯一码
+		share.title = '这个清明，一起来种株佛心莲吧。';
+		share.friendTitle = '这个清明，一起来种株佛心莲吧。';
+		share.desc = '千灯万盏，不如心灯一盏。';
+		share.link = 'https://b.cqyouloft.com/qingming2017/index.html';
+		setShareInfo();	
     });
-
 
     //点击分享
     $('.page2').find('.share').click(function() {
@@ -199,29 +251,28 @@ $(function() {
 				});
 				//分享埋点
 				if (WNLUtil.isIOS) {
-					_czc.push(['_trackEvent','foolday2017_oldshare_ios', 'click']);
+					_czc.push(['_trackEvent','qingming2017_oldshare_ios', 'click']);
 				}else if (WNLUtil.isAndroid) {
-					_czc.push(['_trackEvent','foolday2017_oldshare_android', 'click']);
+					_czc.push(['_trackEvent','qingming2017_oldshare_android', 'click']);
 				}
 				}else {
 					$('.sharemask, .wnl-sharetool').removeClass('hidden');
 					setWnlShare(shareOB);
 					if (WNLUtil.isIOS) {
-						_czc.push(['_trackEvent','foolday2017_newshare_ios', 'click']);
+						_czc.push(['_trackEvent','qingming2017_newshare_ios', 'click']);
 				}else if (WNLUtil.isAndroid) {
-						_czc.push(['_trackEvent','foolday2017_newshare_android', 'click']);
+						_czc.push(['_trackEvent','qingming2017_newshare_android', 'click']);
 						}
 					}
 				}
 				else if (WNLUtil.isWeixin) {
 					if (WNLUtil.isIOS) {
-						_czc.push(['_trackEvent', 'foolday2017_wxsharebtn_ios', 'click']);
+						_czc.push(['_trackEvent', 'qingming2017_wxsharebtn_ios', 'click']);
 					} else if (WNLUtil.isAndroid) {
-						_czc.push(['_trackEvent', 'foolday2017_wxsharebtn_android', 'click']);
+						_czc.push(['_trackEvent', 'qingming2017_wxsharebtn_android', 'click']);
 					}
 					$('.showShareMask').removeClass('hidden');//移除分享列表
-				};
-			
+				};	
     })
 
     //万年历分享工具设置
@@ -249,7 +300,7 @@ function setShareInfo() {
 		imgUrl: share.imgUrl, // 分享图标
 		success: function () {
 			// 用户确认分享后执行的回调函数
-			_czc.push(['_trackEvent', 'foolday2017_wxshare_timeline', 'click']);//统计分享次数，后台可查看
+			_czc.push(['_trackEvent', 'qingming2017_wxshare_timeline', 'click']);//统计分享次数，后台可查看
 		},
 		cancel: function () {
 			// 自定义用户取消分享后执行的回调函数
@@ -267,7 +318,7 @@ function setShareInfo() {
 		success: function () {
 			// 用户确认分享后执行的回调函数
 			$('.showShareMask').addClass('hidden');
-			_czc.push(['_trackEvent', 'foolday2017_wxshare_appmessage', 'click']);
+			_czc.push(['_trackEvent', 'qingming2017_wxshare_appmessage', 'click']);
 		},
 		cancel: function () {
 			// 用户取消分享后执行的回调函数
@@ -283,7 +334,7 @@ function setShareInfo() {
 		success: function () {
 			// 用户确认分享后执行的回调函数
 			$('.showShareMask').addClass('hidden');
-			_czc.push(['_trackEvent', 'foolday2017_wxshare_qq', 'click']);
+			_czc.push(['_trackEvent', 'qingming2017_wxshare_qq', 'click']);
 		},
 		cancel: function () {
 			// 用户取消分享后执行的回调函数
@@ -294,10 +345,10 @@ function setShareInfo() {
 function shareCallback(state) {
 	$('.sharemask, .wnl-sharetool').addClass('hidden');
 	if (WNLUtil.isAndroid) {
-		_czc.push(['_trackEvent', 'foolday2017_appshare_android', 'click']);
+		_czc.push(['_trackEvent', 'qingming2017_appshare_android', 'click']);
 	}
 	else if (WNLUtil.isIOS) {
-		_czc.push(['_trackEvent', 'foolday2017_appshare_ios', 'click']);
+		_czc.push(['_trackEvent', 'qingming2017_appshare_ios', 'click']);
 	}
 }
 
