@@ -1,0 +1,329 @@
+//获取url地址中的参数值
+function getQueryString(name) {
+	var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+	var r = window.location.search.substr(1).match(reg);
+	if (r !== null) {
+		return decodeURIComponent(r[2]);
+	}
+	return null;
+}
+
+window.share = {
+	title : '【查收】谷雨时节有好运！',//设置分享到朋友圈的题目
+	friendTitle : '【查收】谷雨时节有好运！',//设置分享给好友的题目
+	link : 'https://b.cqyouloft.com/guyu2017/index.html?share=1',//分享链接
+	imgUrl : 'https://b.cqyouloft.com/guyu2017/img/share.jpg',//分享icon
+	desc : '你有一张谷雨好运卡待领取>>'//附加的描述信息
+};
+var shareOB = window.share,shareimg,sharepic = getQueryString('sharepic');//初始化万年历分享对象
+// var adArr = ['<a class="ads ad1">远离湿胖，第二瓶红豆薏粉1元抢>></a>',
+//             '<a class="ads ad2">清火去病，谷雨茶礼包装>></a>',
+//             '<a class="ads ad3">玫瑰花茶9.9包邮>></a>',
+//             '<a class="ads ad4">创意太阳伞晴雨两用15.5包邮>></a>'];
+
+$(function() {
+    FastClick.attach(document.body);//消除移动端点击延迟
+
+	//首页燕子动画
+	var mouseDom = $(".bird");
+    var mouseImg = mouseDom.find("img");
+    var mouseAnimate = function () {
+        mouseDom.css("display", "block");
+        mouseDom.fadeIn(500);
+        var width = $(".page").width()
+        var p5 = {x: -96, y: 150};
+        var p4 = {x: width / 4 * 1, y: 220};
+        var p3 = {x: width / 4 * 2, y: 200};
+        var p2 = {x: width / 4 * 3, y: 100};
+        var p1 = {x: width / 4 * 4 - 105, y: 85};
+        var bezierAnimate = new bezier({
+            points: [p1, p2, p3, p4, p5],
+            frame: function (np, v) {
+                var mouseDom = $(".bird");
+                mouseDom.css({left: np.x, top: np.y});
+                mouseScal(v);
+                // console.log("np", np);
+            },
+            complete: function () {
+                mouseDom.fadeOut(500,function() {
+					$(this).addClass('hidden');
+				});
+            },
+            duration: 2000
+        });
+    }
+
+    var mouseScal = function (ease) {
+        var height = 96 + ease * 20;
+        var width = 96 + ease * 40;
+        mouseImg.attr("height", height);
+        mouseImg.attr("width", width);
+    }
+
+    var manTimes = 0;
+    function manFrame() {
+        // var manTime = 0;
+        // if (manTimes >= 28) {
+        //     manTime = 5;
+        //     manTimes = 0;
+            mouseAnimate();
+        // } else {
+        //     manTime = manTimes % 4 + 1;
+        // }
+        // // manDom.attr("src", "http://res.imtt.qq.com/browser_yiya/images/colorEgg/man" + manTime + ".png");
+        // manTimes++;
+    }
+
+    setTimeout(function () {
+        manFrame();
+    }, 500);
+
+    $(window).resize(function () {
+        setTimeout(function () {
+            manFrame();
+        }, 500);
+	})
+
+	//首页点击
+    $('.page').click(function() {
+        $('.water').addClass('down');
+		$('.btn').fadeOut(600);
+		var img = $("<img class='results' src='https://b.cqyouloft.com/guyu2017/img/card" +Math.floor(Math.random()*5+1)+ ".png'/>");
+		var count = $(img).attr('src').substr(41,1);
+        $('.top1').append(img);//生成随机的结果页
+		var water = document.getElementsByClassName('water')[0];
+		// water.addEventListener('webkitAnimationEnd',function() {
+			$('.page').fadeOut(1800);
+			$('.page1').fadeIn(1600);
+			// console.log(count)
+			shareImage=$('.top1').find('img').eq(0).attr("src");
+			shareOB=shareImage;
+			share.title = '【好友@你】好运卡待查收';
+			share.friendTitle = '【好友@你】好运卡待查收';
+			share.desc = '你有一张谷雨好运卡待领取>>';
+			share.link = 'https://b.cqyouloft.com/guyu2017/index.html?sharepic=https://b.cqyouloft.com/guyu2017/img/card' + count + '.png';
+			setShareInfo();
+		// });
+    });
+
+    $('.again').click(function() {        
+		$('.water').removeClass('down');
+		var img1 = $("<img class='results1' src='https://b.cqyouloft.com/guyu2017/img/card" +Math.floor(Math.random()*5+1)+ ".png'/>");
+		var count1 = $(img1).attr('src').substr(41,1);		
+		$('.top1').append(img1);//生成随机的结果页        
+		$('.top1').find('img').eq(0).animate({left:'-100%'},600).fadeOut(10,function() {
+			$(this).remove();
+		});
+		$('.results1').animate({
+			left: '0.83rem'
+		},600);
+		shareImage=$('.top1').find('img').eq(0).attr("src");
+		shareOB=shareImage;
+		share.link = 'https://b.cqyouloft.com/guyu2017/index.html?sharepic=https://b.cqyouloft.com/guyu2017/img/card' + count1 + '.png';
+		setShareInfo();
+			
+    });
+
+	//点击分享
+	$('.share').click(function() {
+		if (WNLUtil.isWnl) {
+			if ((WNLUtil.isIOS && WNLUtil.appVersion <= 450) || (WNLUtil.isAndroid && WNLUtil.appVersion <= 451)) {
+				WNLUtil.setShareDataOld({
+					pureText: share.title,
+					text: share.title,
+					image: '0',
+					url: share.link,
+					targetUrl: share.link,
+					imageURL: share.imgUrl
+				});
+				//分享埋点
+				if (WNLUtil.isIOS) {
+					_czc.push(['_trackEvent','guyu2017_oldshare_ios', 'click']);
+				}else if (WNLUtil.isAndroid) {
+					_czc.push(['_trackEvent','guyu2017_oldshare_android', 'click']);
+				}
+				}else {
+					$('.sharemask, .wnl-sharetool').removeClass('hidden');
+					setWnlShare(shareOB);
+					if (WNLUtil.isIOS) {
+						_czc.push(['_trackEvent','guyu2017_newshare_ios', 'click']);
+				}else if (WNLUtil.isAndroid) {
+						_czc.push(['_trackEvent','guyu2017_newshare_android', 'click']);
+						}
+					}
+				}
+				else if (WNLUtil.isWeixin) {
+					if (WNLUtil.isIOS) {
+						_czc.push(['_trackEvent', 'guyu2017_wxsharebtn_ios', 'click']);
+					} else if (WNLUtil.isAndroid) {
+						_czc.push(['_trackEvent', 'guyu2017_wxsharebtn_android', 'click']);
+					}
+					$('.showShareMask').removeClass('hidden');//移除分享列表
+				}
+	})
+
+
+	if(sharepic) {
+		$('.page').addClass('hidden');
+		$('.page1').find('.top1').append('<img id="imgshare" src="' +sharepic+ '"/>');
+		$('#imgshare').addClass('results');
+		$('.page1').find('.again,.share').addClass('hidden');
+		$('.page1').find('.click').removeClass('hidden');
+		$('.page1').removeClass('hidden');
+		$('.page1').find('.click').click(function() {
+			window.location.href = 'https://b.cqyouloft.com/guyu2017/index.html';
+		})
+	}
+
+    //万年历、微信分享工具设置
+    $('.showShareMask').click(function(){
+		$(this).addClass('hidden');
+	});
+
+	$('.sharemask, .cancle-share').click(function(){
+		$('.sharemask, .wnl-sharetool').addClass('hidden');
+	});
+
+	wx.ready(function() {  //微信分享
+		setShareInfo();
+	});
+})
+
+function setShareInfo() {
+	//获取“分享到朋友圈”按钮点击状态及自定义分享内容接口
+	wx.onMenuShareTimeline({
+		title: share.title, // 分享标题
+		link: share.link, // 分享链接
+		imgUrl: share.imgUrl, // 分享图标
+		success: function () {
+			// 用户确认分享后执行的回调函数
+			$('.showShareMask').addClass('hidden');            
+			_czc.push(['_trackEvent', 'guyu2017_wxshare_timeline', 'click']);//埋点统计，后台可查看
+		},
+		cancel: function () {
+			// 自定义用户取消分享后执行的回调函数
+		}
+	});
+
+	//获取“分享给朋友”按钮点击状态及自定义分享内容接口
+	wx.onMenuShareAppMessage({
+		title: share.friendTitle, // 分享标题(引用分享给朋友之后的标题)
+		desc: share.desc, // 分享描述
+		link: share.link, // 分享链接
+		imgUrl: share.imgUrl, // 分享图片地址
+		//type: '', // 分享类型,music、video或link，不填默认为link
+		//dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+		success: function () {
+			// 用户确认分享后执行的回调函数
+			$('.showShareMask').addClass('hidden');
+			_czc.push(['_trackEvent', 'guyu2017_wxshare_appmessage', 'click']);
+		},
+		cancel: function () {
+			// 用户取消分享后执行的回调函数
+		}
+	});
+
+	//获取“分享到QQ”按钮点击状态及自定义分享内容接口
+	wx.onMenuShareQQ({
+		title: share.title, // 分享标题
+		desc: share.desc, // 分享描述
+		link: share.link, // 分享链接
+		imgUrl: share.imgUrl, // 分享图标
+		success: function () {
+			// 用户确认分享后执行的回调函数
+			$('.showShareMask').addClass('hidden');
+			_czc.push(['_trackEvent', 'guyu2017_wxshare_qq', 'click']);
+		},
+		cancel: function () {
+			// 用户取消分享后执行的回调函数
+		}
+	});
+}
+
+function shareCallback(state) {
+	$('.sharemask, .wnl-sharetool').addClass('hidden');
+	if (WNLUtil.isAndroid) {
+		_czc.push(['_trackEvent', 'guyu2017_appshare_android', 'click']);
+	}
+	else if (WNLUtil.isIOS) {
+		_czc.push(['_trackEvent', 'guyu2017_appshare_ios', 'click']);
+	}
+}
+
+function showWnlShareTool(){
+	$('.sharemask, .wnl-sharetool').removeClass('hidden');
+	setWnlShare(shareOB);
+}
+
+function setWnlShare(param){
+	if (typeof param == 'string') {
+		$('.weixin').click(function(){
+			WNLUtil.setShareDataForImage('weixin', param);
+			window.location.href = 'protocol://share#' + encodeURIComponent(JSON.stringify(WNLUtil.shareObject));
+		});
+		$('.weixin_circle').click(function(){
+			WNLUtil.setShareDataForImage('weixin_circle', param);
+			window.location.href = 'protocol://share#' + encodeURIComponent(JSON.stringify(WNLUtil.shareObject));
+		});
+		$('.qq').click(function(){
+			WNLUtil.setShareData('qq', {
+				title: share.title,
+				text: share.title,
+				image: param,
+				url: share.link
+			});
+			window.location.href = 'protocol://share#' + encodeURIComponent(JSON.stringify(WNLUtil.shareObject));
+		});
+		$('.weibo').click(function(){
+			WNLUtil.setShareDataForImage('sina', param);
+			window.location.href = 'protocol://share#' + encodeURIComponent(JSON.stringify(WNLUtil.shareObject));
+		});
+	}else if (typeof param == 'object') {
+		$('.weixin').click(function(){
+			WNLUtil.setShareData('weixin', {
+				title: share.title,
+				text: share.desc,
+				image: share.imgUrl,
+				url: share.link
+			});
+			window.location.href = 'protocol://share#' + encodeURIComponent(JSON.stringify(WNLUtil.shareObject));
+		});
+		$('.weixin_circle').click(function(){
+			WNLUtil.setShareData('weixin_circle', {
+				title: share.title,
+				text: share.desc,
+				image: share.imgUrl,
+				url: share.link
+			});
+			window.location.href = 'protocol://share#' + encodeURIComponent(JSON.stringify(WNLUtil.shareObject));
+		});
+		$('.qq').click(function(){
+			WNLUtil.setShareData('qq', {
+				title: share.title,
+				text: share.desc,
+				image: share.imgUrl,
+				url: share.link
+			});
+			window.location.href = 'protocol://share#' + encodeURIComponent(JSON.stringify(WNLUtil.shareObject));
+		});
+		$('.weibo').click(function(){
+			if(WNLUtil.isIOS){
+				WNLUtil.setShareData('sina', {
+					title: share.title,
+					text: share.desc,
+					image: share.imgUrl,
+					url: share.link
+				});
+				window.location.href = 'protocol://share#' + encodeURIComponent(JSON.stringify(WNLUtil.shareObject));
+			}else if (WNLUtil.isAndroid) {
+				WNLUtil.setShareData('sina', {
+					title: share.title,
+					text: share.title+share.link,
+					image: share.imgUrl,
+					url: share.link
+				});
+				window.location.href = 'protocol://share#' + encodeURIComponent(JSON.stringify(WNLUtil.shareObject));
+			}
+		});
+	}
+}
