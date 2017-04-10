@@ -15,12 +15,7 @@ window.share = {
 	imgUrl : 'https://b.cqyouloft.com/guyu2017/img/share.jpg',//分享icon
 	desc : '你有一张谷雨好运卡待领取>>'//附加的描述信息
 };
-var shareOB = window.share,shareimg,sharepic = getQueryString('sharepic');//初始化万年历分享对象
-// var adArr = ['<a class="ads ad1">远离湿胖，第二瓶红豆薏粉1元抢>></a>',
-//             '<a class="ads ad2">清火去病，谷雨茶礼包装>></a>',
-//             '<a class="ads ad3">玫瑰花茶9.9包邮>></a>',
-//             '<a class="ads ad4">创意太阳伞晴雨两用15.5包邮>></a>'];
-
+var shareOB = window.share,shareimg,sharepic = getQueryString('sharepic'),count,count1;//初始化万年历分享对象
 $(function() {
     FastClick.attach(document.body);//消除移动端点击延迟
 
@@ -29,13 +24,13 @@ $(function() {
     var mouseImg = mouseDom.find("img");
     var mouseAnimate = function () {
         mouseDom.css("display", "block");
-        mouseDom.fadeIn(500);
-        var width = $(".page").width()
-        var p5 = {x: -96, y: 150};
+        mouseDom.removeClass('fadeout');
+        var width = $(".page").width();
+        var p5 = {x: -96, y: 180};
         var p4 = {x: width / 4 * 1, y: 220};
         var p3 = {x: width / 4 * 2, y: 200};
         var p2 = {x: width / 4 * 3, y: 100};
-        var p1 = {x: width / 4 * 4 - 105, y: 85};
+        var p1 = {x: width / 4 * 4 - 85, y: 85};
         var bezierAnimate = new bezier({
             points: [p1, p2, p3, p4, p5],
             frame: function (np, v) {
@@ -46,82 +41,77 @@ $(function() {
             },
             complete: function () {
                 mouseDom.fadeOut(500,function() {
-					$(this).addClass('hidden');
+					$(this).addClass('fadeout');
 				});
             },
             duration: 2000
         });
     }
-
     var mouseScal = function (ease) {
         var height = 96 + ease * 20;
         var width = 96 + ease * 40;
         mouseImg.attr("height", height);
         mouseImg.attr("width", width);
     }
-
-    var manTimes = 0;
     function manFrame() {
-        // var manTime = 0;
-        // if (manTimes >= 28) {
-        //     manTime = 5;
-        //     manTimes = 0;
-            mouseAnimate();
-        // } else {
-        //     manTime = manTimes % 4 + 1;
-        // }
-        // // manDom.attr("src", "http://res.imtt.qq.com/browser_yiya/images/colorEgg/man" + manTime + ".png");
-        // manTimes++;
+		mouseAnimate();
     }
-
     setTimeout(function () {
         manFrame();
-    }, 500);
-
+    }, 800);
     $(window).resize(function () {
         setTimeout(function () {
             manFrame();
-        }, 500);
+        }, 800);
 	})
 
+
+	var img = new Image();
+	img.src = 'https://b.cqyouloft.com/guyu2017/img/card' +Math.floor(Math.random()*5+1)+ '.png';
+	$(img).addClass('results');
+	count = img.src.substr(41,1);
+	$('.shadow').append(img);//生成随机的结果页
 	//首页点击
-    $('.page').click(function() {
+    $('.page').bind('touchstart',function(e) {
+		e.preventDefault();
+		$('.foot,.icon').fadeOut(300);
         $('.water').addClass('down');
-		$('.btn').fadeOut(600);
-		var img = $("<img class='results' src='https://b.cqyouloft.com/guyu2017/img/card" +Math.floor(Math.random()*5+1)+ ".png'/>");
-		var count = $(img).attr('src').substr(41,1);
-        $('.top1').append(img);//生成随机的结果页
-		var water = document.getElementsByClassName('water')[0];
-		// water.addEventListener('webkitAnimationEnd',function() {
-			$('.page').fadeOut(1800);
-			$('.page1').fadeIn(1600);
-			// console.log(count)
-			shareImage=$('.top1').find('img').eq(0).attr("src");
-			shareOB=shareImage;
-			share.title = '【好友@你】好运卡待查收';
-			share.friendTitle = '【好友@你】好运卡待查收';
-			share.desc = '你有一张谷雨好运卡待领取>>';
-			share.link = 'https://b.cqyouloft.com/guyu2017/index.html?sharepic=https://b.cqyouloft.com/guyu2017/img/card' + count + '.png';
-			setShareInfo();
+		$('.page').fadeOut(1500);
+		$('.page1').fadeIn(3000);
+		
+		// console.log(count)
+		shareImage=$('.shadow').find('img').eq(0).attr("src");
+		shareOB=shareImage;
+		share.title = '【好友@你】好运卡待查收';
+		share.friendTitle = '【好友@你】好运卡待查收';
+		share.desc = '你有一张谷雨好运卡待领取>>';
+		share.link = 'https://b.cqyouloft.com/guyu2017/index.html?sharepic=https://b.cqyouloft.com/guyu2017/img/card' + count + '.png';
+		setShareInfo();
 		// });
     });
 
-    $('.again').click(function() {        
+    $('.again').click(function() {      
+		$('.again').attr('disabled','true');		  
 		$('.water').removeClass('down');
-		var img1 = $("<img class='results1' src='https://b.cqyouloft.com/guyu2017/img/card" +Math.floor(Math.random()*5+1)+ ".png'/>");
-		var count1 = $(img1).attr('src').substr(41,1);		
-		$('.top1').append(img1);//生成随机的结果页        
-		$('.top1').find('img').eq(0).animate({left:'-100%'},600).fadeOut(10,function() {
-			$(this).remove();
-		});
-		$('.results1').animate({
-			left: '0.83rem'
-		},600);
-		shareImage=$('.top1').find('img').eq(0).attr("src");
+		var shadow2 = "<div class='shadow2'><img class='results1' src='https://b.cqyouloft.com/guyu2017/img/card" +Math.floor(Math.random()*5+1)+ ".png'></div>";		
+		count1 = $(shadow2).find('img').attr('src').substr(41,1);
+		$('.top1').append(shadow2);	
+		
+		// console.log(img1)	       		       
+		// document.getElementsByClassName('results1')[0].onload = function(){
+			$('.top1').find('div').eq(0).animate({marginLeft:'-100%',opacity:0},600,function() {
+				$(this).remove();
+			});
+			$('.shadow2').animate({
+				left: 0,
+			},600,function() {
+				$('.again').removeAttr('disabled');
+			});
+		// }
+		shareImage=$('.shadow2').find('img').eq(0).attr("src");
 		shareOB=shareImage;
 		share.link = 'https://b.cqyouloft.com/guyu2017/index.html?sharepic=https://b.cqyouloft.com/guyu2017/img/card' + count1 + '.png';
-		setShareInfo();
-			
+		setShareInfo();	
     });
 
 	//点击分享
@@ -162,8 +152,8 @@ $(function() {
 				}
 	})
 
-
 	if(sharepic) {
+		$('.shadow,.shadow2').remove();
 		$('.page').addClass('hidden');
 		$('.page1').find('.top1').append('<img id="imgshare" src="' +sharepic+ '"/>');
 		$('#imgshare').addClass('results');
