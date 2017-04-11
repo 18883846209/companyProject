@@ -16,6 +16,7 @@ window.share = {
 	desc : '你有一张谷雨好运卡待领取>>'//附加的描述信息
 };
 var shareOB = window.share,shareimg,sharepic = getQueryString('sharepic'),count,count1;//初始化万年历分享对象
+// var adArr = []
 $(function() {
     FastClick.attach(document.body);//消除移动端点击延迟
 
@@ -68,9 +69,11 @@ $(function() {
 
 	var img = new Image();
 	img.src = 'https://b.cqyouloft.com/guyu2017/img/card' +Math.floor(Math.random()*5+1)+ '.png';
-	$(img).addClass('results');
-	count = img.src.substr(41,1);
-	$('.shadow').append(img);//生成随机的结果页
+	img.onload = function() {
+		$(img).addClass('results');
+		count = img.src.substr(41,1);
+		$('.shadow').removeClass('hidden').append(img);//生成随机的结果页
+	}
 	//首页点击
     $('.page').bind('touchstart',function(e) {
 		e.preventDefault();
@@ -90,24 +93,28 @@ $(function() {
 		// });
     });
 
+	//再领一次
     $('.again').click(function() {      
 		$('.again').attr('disabled','true');		  
 		$('.water').removeClass('down');
-		var shadow2 = "<div class='shadow2'><img class='results1' src='https://b.cqyouloft.com/guyu2017/img/card" +Math.floor(Math.random()*5+1)+ ".png'></div>";		
+		var shadow2 = "<div class='shadow2'><img class='results' src='https://b.cqyouloft.com/guyu2017/img/card" +Math.floor(Math.random()*5+1)+ ".png'></div>";		
 		count1 = $(shadow2).find('img').attr('src').substr(41,1);
-		$('.top1').append(shadow2);	
-		
-		// console.log(img1)	       		       
-		// document.getElementsByClassName('results1')[0].onload = function(){
-			$('.top1').find('div').eq(0).animate({marginLeft:'-100%',opacity:0},600,function() {
+		var img1 = new Image();
+		img1.src = 'https://b.cqyouloft.com/guyu2017/img/card' + count1 + '.png';
+		img1.onload = function() {
+			$('.top1').append(shadow2);	
+				$('.top1').find('div').eq(0).animate({marginLeft:'-100%',opacity:0},900,function() {
 				$(this).remove();
 			});
 			$('.shadow2').animate({
 				left: 0,
-			},600,function() {
+			},900,function() {
 				$('.again').removeAttr('disabled');
 			});
-		// }
+		
+		}
+		// console.log(img1)	       		       
+		
 		shareImage=$('.shadow2').find('img').eq(0).attr("src");
 		shareOB=shareImage;
 		share.link = 'https://b.cqyouloft.com/guyu2017/index.html?sharepic=https://b.cqyouloft.com/guyu2017/img/card' + count1 + '.png';
