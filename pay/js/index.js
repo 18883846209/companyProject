@@ -7,53 +7,15 @@ window.share = {
 };
 var shareOB = window.share;
 $(function() {
+    _czc.push(['_trackEvent', 'Pay.IM', 'show']);
    FastClick.attach(document.body);
+
+   $('.swiper-slide').click(function() {
+       console.log($(this).index());
+   })
    var lists = $('.data').length;
    console.log(lists);
-// if (WNLUtil.isWnl) {
-// 			if ((WNLUtil.isIOS && WNLUtil.appVersion <= 450) || (WNLUtil.isAndroid && WNLUtil.appVersion <= 451)) {
-// 				WNLUtil.setShareDataOld({
-// 					pureText: share.title,
-// 					text: share.title,
-// 					image: '0',
-// 					url: share.link,
-// 					targetUrl: share.link,
-// 					imageURL: share.imgUrl
-// 				});
-// 				//分享埋点
-// 				if (WNLUtil.isIOS) {
-// 					_czc.push(['_trackEvent','guyu2017_oldshare_ios', 'click']);
-// 				}else if (WNLUtil.isAndroid) {
-// 					_czc.push(['_trackEvent','guyu2017_oldshare_android', 'click']);
-// 				}
-// 				}else {
-// 					$('.sharemask, .wnl-sharetool').removeClass('hidden');
-// 					setWnlShare(shareOB);
-// 					if (WNLUtil.isIOS) {
-// 						_czc.push(['_trackEvent','guyu2017_newshare_ios', 'click']);
-// 				}else if (WNLUtil.isAndroid) {
-// 						_czc.push(['_trackEvent','guyu2017_newshare_android', 'click']);
-// 						}
-// 					}
-// 				}
-// 				else if (WNLUtil.isWeixin) {
-// 					if (WNLUtil.isIOS) {
-// 						_czc.push(['_trackEvent', 'guyu2017_wxsharebtn_ios', 'click']);
-// 					} else if (WNLUtil.isAndroid) {
-// 						_czc.push(['_trackEvent', 'guyu2017_wxsharebtn_android', 'click']);
-// 					}
-// 					$('.showShareMask').removeClass('hidden');//移除分享列表
-// 				}
-
-   //万年历分享工具设置
-//    $('.showShareMask').click(function(){
-//        $(this).addClass('hidden');
-//    });
-
-//    $('.sharemask, .cancle-share').click(function(){
-//        $('.sharemask, .wnl-sharetool').addClass('hidden');
-//    });
-
+   
    wx.ready(function() {  //微信分享
        setShareInfo();
    });

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
-    <title>还在为买东西焦头烂额？快来万年历看看吧！</title>
+    <title>还在为买东西焦头烂额？快来万年历看看吧！涵盖所有的分期购物平台，海量商品全放进你的口袋，还犹豫什么，赶快点击我！</title>
      <script src="js/flexible.js"></script> 
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="swiper.min.css">  
@@ -17,6 +17,19 @@
 </head>
 <body>
      <div id="content"> 
+            <!-- <div class="shareContent hidden">
+                <a class="shareBtn" href="javascript:void(0)">分享</a>
+                <div class="shareDomPanel">
+                    <div class="bdsharebuttonbox" data-tag="share_1">
+                        <a class="bds_tsina" data-cmd="tsina"></a>
+                        <a class="bds_tqq" data-cmd="tqq"></a>
+                        <a class="bds_qzone" data-cmd="qzone" href="#"></a>
+                        <a class="bds_sqq" data-cmd="sqq"></a>
+                        <a class="bds_weixin" data-cmd="weixin"></a>
+                    </div>
+                </div>
+            </div> -->
+
         <div id="top_banner">
             <div class="swiper-container">
                 <div class="swiper-wrapper">
@@ -212,26 +225,7 @@
     // }
     
 </script> 
-<script>
-    window._bd_share_config = {
-        common : {
-            "bdSnsKey" : {},
-            "bdText" : '还在为买东西焦头烂额？快来万年历看看吧！',
-            "bdDesc" : '涵盖所有的分期购物平台，海量商品全放进你的口袋，还犹豫什么，赶快点击我！',
-            "bdUrl" : 'http://mobile.51wnl.com/temporary/pay2017/index.html',
-            "bdPic" : 'http://mobile.51wnl.com/temporary/pay2017/img/share.jpg'
-        },
-        share : [{
-            "bdSize" : 32
-        }]
-    };
-    with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
-    // window.share = {
-    //     url: 'http://mobile.51wnl.com/temporary/pay2017/index.html',
-    //     title: '还在为买东西焦头烂额？快来万年历看看吧！',
-    //     description: '涵盖所有的分期购物平台，海量商品全放进你的口袋，还犹豫什么，赶快点击我！'
-    // }
-</script>
+
 <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>    
 <script>
     //微信分享
@@ -261,5 +255,26 @@
 </script>     
 <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1261564228'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1261564228' type='text/javascript'%3E%3C/script%3E"));</script> 
 <script src="js/index.js"></script> 
+<script>
+    var sharetitle = "还在为买东西焦头烂额？快来万年历看看吧！";
+    var sharetext = "涵盖所有的分期购物平台，海量商品全放进你的口袋，还犹豫什么，赶快点击我！";
+    window._bd_share_config = {
+        common : {
+            "bdSnsKey" : {},
+            "bdText" : "",
+            "bdDesc" : "",
+            "bdUrl" : 'http://mobile.51wnl.com/temporary/pay2017/index.html',
+            "bdPic" : 'http://mobile.51wnl.com/temporary/pay2017/img/share.jpg',
+            "onBeforeClick":function(cmd,config){
+                        return {'bdText': sharetitle,'bdDesc': sharetext}
+                     }
+        },
+        share : [{
+            "bdSize" : 32
+        }]
+    };
+    with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+  
+</script>
 </body>
 </html>
