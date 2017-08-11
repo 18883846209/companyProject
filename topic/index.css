@@ -21,6 +21,7 @@ html,body {
     -webkit-overflow-scrolling:touch;  
     box-sizing:border-box;
     height:auto; 
+    overflow: auto;
     -webkit-text-size-adjust:none;    
     background-color: rgb(41, 33, 66);
     font-family: -apple-system, "苹方-简", "Helvetica Neue", "Helvetica", "STHeitiSC-Light", "Arial", sans-serif;        
@@ -95,7 +96,32 @@ body {
 #cnzz_stat_icon_1261564228{
     display: none;
 }
-.xs,.xs1,.xs2 {
+.v {
+    width: calc(100vw - 140px); 
+    height: 76px;
+    margin: 30px auto 19px;
+    display: flex;
+    justify-content: space-between;
+     /* 09版 */  
+    -webkit-box-pack: space-between;  
+    /* 12版 */  
+    -webkit-justify-content: space-between;  
+    -moz-justify-content: space-between;  
+    -ms-justify-content: space-between;  
+    -o-justify-content: space-between;  
+    /* 09版 */  
+    -webkit-box-align: center;  
+    /* 12版 */  
+    -webkit-align-items: center;  
+    -moz-align-items: center;  
+    -ms-align-items: center;  
+    -o-align-items: center;  
+    align-items: center;  
+    /* background: url('img/topic-viewpoint-bg@2x.png') no-repeat;
+    background-position: 50% 50%;
+    background-size: 241px 76px; */
+}
+.xs,.hb {
     text-align: center;
     display: box;               
     display: -webkit-box;       
@@ -120,22 +146,24 @@ body {
     -ms-align-items: center;  
     -o-align-items: center;  
     align-items: center;  
+    position: relative;
+    overflow: hidden;
 }
-.xs {
+/* .xs {
     border: 1px solid transparent;
     border-radius: 50%;
     height: 110px;
     width:110px;
     background-color: rgba(223,129,91,0.1);
 }
-.xs1 {
+ .xs1 {
     border: 1px solid transparent;
     border-radius: 50%;
     height: 85px;
     width:85px;
     background-color: rgba(223,129,91,0.3);
-}
- .xs2 {
+} */
+ .xs {
     width: 70px;
     height: 70px;
     background: url(img/topic-point1-circle@2x.png) no-repeat;
@@ -143,34 +171,9 @@ body {
     background-size: 70px 70px;
     color: white;
     font-size: 20px;
-} 
-.hb,.hb1,.hb2 {
-    text-align: center;
-    display: box;               
-    display: -webkit-box;       
-    display: -moz-box;           
-    display: -ms-flexbox;      
-    display: -webkit-flex;      
-    display: flex;               
-    /* 09版 */  
-    -webkit-box-pack: center;  
-    /* 12版 */  
-    -webkit-justify-content: center;  
-    -moz-justify-content: center;  
-    -ms-justify-content: center;  
-    -o-justify-content: center;  
-    justify-content: center;  
-    
-    /* 09版 */  
-    -webkit-box-align: center;  
-    /* 12版 */  
-    -webkit-align-items: center;  
-    -moz-align-items: center;  
-    -ms-align-items: center;  
-    -o-align-items: center;  
-    align-items: center;  
-}
-.hb {
+}  
+
+/* .hb {
     border: 1px solid transparent;
     border-radius: 50%;
     height: 102px;
@@ -183,8 +186,8 @@ body {
     height: 86px;
     width:86px;
     background-color: rgba(27,170,169,0.45);
-}
- .hb2 {
+} */
+ .hb {
     width: 70px;
     height: 70px;
     background: url(img/topic-point2-circle@2x.png) no-repeat;
@@ -193,36 +196,35 @@ body {
     color: white;
     font-size: 20px;
 }
-
-.v {
-    width: calc(100vw - 25.5px - 27px); 
-    margin: 10px auto 19px 25.5px;
-    display: flex;
-    justify-content: space-around;
-     /* 09版 */  
-    -webkit-box-pack: space-around;  
-    /* 12版 */  
-    -webkit-justify-content: space-around;  
-    -moz-justify-content: space-around;  
-    -ms-justify-content: space-around;  
-    -o-justify-content: space-around;  
-    /* 09版 */  
-    -webkit-box-align: center;  
-    /* 12版 */  
-    -webkit-align-items: center;  
-    -moz-align-items: center;  
-    -ms-align-items: center;  
-    -o-align-items: center;  
-    align-items: center;  
+.left {
+    float: left;
+    width: 0;
+    height: 5px;
+    background-color: rgb(223,129,91);
+}
+.change {
+    width: calc(100vw - 140px - 140px);
+    height: 5px;
+    background-color: rgb(41, 33, 66);
+}
+.change .right {
+    float: right;
+    height: 5px;
+    position: relative;
+}
+.change .right1 {
+    position: absolute;
+     background-color: rgb(41, 33, 66); 
+    height: 5px;
+    z-index: 100;
 }
 .hidden{
     display: none !important;
 }
 .problem {
-     background-color: rgb(41, 33, 60); 
     width: 100%;
     height: 150px;
-        display: box;               
+    display: box;               
     display: -webkit-box;       
     display: -moz-box;           
     display: -ms-flexbox;      
@@ -438,7 +440,7 @@ body {
     background-color: rgba(255,255,255,0.95);
     box-shadow: 0 1px 0 rgba(0,0,0,0.1);
     z-index: 100;
-    display: none;
+    /* display: none; */
 }   
 .llslogo {
     position: absolute;
@@ -491,3 +493,4 @@ body {
     text-align:center;
     text-decoration: none;
 }
+

@@ -5,7 +5,14 @@ window.share = {
     imgUrl: 'http://192.168.2.19/topic/img/share.png'
 };
 var shareOB = window.share;
-
+function getQueryString(name) {
+	var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+	var r = window.location.search.substr(1).match(reg);
+	if (r !== null) {
+		return decodeURIComponent(r[2]);
+	}
+	return null;
+}
 
 //时间转换
 function getDateDiff(dateTimeStamp){
@@ -15,8 +22,8 @@ function getDateDiff(dateTimeStamp){
 	var halfamonth = day * 15;
 	var month = day * 30;
 	var now = new Date().getTime();
-    // var diffValue = now - dateTimeStamp;
-	var diffValue = now - 1502164549123;    
+    var diffValue = now - dateTimeStamp;
+	// var diffValue = now - 1502164549123;    
 	if(diffValue < 0){return;}
 	var monthC =diffValue/month;
 	var weekC =diffValue/(7*day);
@@ -49,32 +56,60 @@ function getDateTimeStamp(dateStr){
 
 $(function() {
     FastClick.attach(document.body);
+    var ua=navigator.userAgent.toLocaleLowerCase();
+    var wnl=ua.indexOf("wnl")>-1;
+    var wx=ua.indexOf("micromessenger")>-1;
+    var isIOSPhone=ua.indexOf("iphone")>-1||ua.indexOf("ipod")>-1;
+    var isIOS=isIOSPhone||ua.indexOf("ipad")>-1;
+    var isAndroid=ua.indexOf("android")>-1;
+    var isWP=ua.indexOf("windows phone")>-1;
+    if(wx) {
+        $('.llsBanner').show()
+    } else {
+        $('.llsBanner').hide()        
+    }
 
+    var jl = $('.v').width() - 140;
     $.ajax({
-        url:'http://lilith.51wnl.com//GetTopicsInfo?tid=10000&uid=10000&cid=Youloft_IOS&tkn=360106c85f1b386a0fc8af1586150b1a ',
+        url:'http://lilith.51wnl.com//GetTopicsInfo?tid=10035&uid=10001&cid=Youloft_IOS&tkn=6480F2A608958030D190E9E62590174A ',
         type:'get',
         success: function(respond) {
-            // $('.problem').css('background','url(' +respond.data.backimg+')')
-            console.log(respond.data.backimg)
-        }
-        
+            var text1 = respond.data.option[0].title,text2 = respond.data.option[1].title;
+            var sum1 = respond.data.option[0].vote,sum2 = respond.data.option[1].vote;
+            $('.xs').html(respond.data.option[0].shortTitle);
+            $('.hb').html(respond.data.option[1].shortTitle);            
+            $('.problem').css('background','url(' +respond.data.backImg+')');
+            // $('.problem').find('p').html('#爱情，应该是互补还是相似的两个人在一起呢?');
+            $('.problem').find('p').html(respond.data.title);            
+            $('.change .right1').css('width',sum2*jl/(sum1 + sum2));
+            $('.change .right').css({'backgroundColor':'rgb(27,170,169)','width':sum2*jl/(sum1 + sum2)});
+            
+            $('.left').animate({
+                width: sum1*jl/(sum1 + sum2) + 'px'
+            },1000);
+             $('.right1').animate({
+                width: 0
+            },1000);
+            console.log(text1);
+            localStorage.setItem('t1',text1);
+            localStorage.setItem('t2',text2);
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert(textStatus);
+                }
     })
 
-
-    
-
     $.ajax({
-        url:'http://lilith.51wnl.com//GetVoteList?tid=10008&skip=1&cid=Youloft_IOS&tkn=6480F2A608958030D190E9E62590174A ',
+        url:'http://lilith.51wnl.com//GetVoteList?tid=10035&skip=1&cid=Youloft_IOS&tkn=6480F2A608958030D190E9E62590174A ',
         type:'get',
         success:function(respond) {
-            console.log(respond.data);
-            // if(respond.data.length > 5) {
-            //     $('.more').show();
-            // } else {
-            //     $('.more').hide();                
-            // }
-            var html = '',xb = '',xz='',hf = '',hf_more = '',dzclass = '',dzimg = '';
+            var html = '',xb = '',xz='',hf = '',hf_more = '',dzclass = '',dzimg = '',option = '';
             for (let i = 0; i < respond.data.length; i ++) {
+                if(respond.data[i].topicOptionId%2 == 0) {
+                    option = '<div class="tp_blue">投票给：'+localStorage.getItem('t2')+'</div>';
+                } else {
+                    option = '<div class="tp">投票给：'+localStorage.getItem('t1')+'</div>';
+                };                
                 if(respond.data[i].sex == '1') {
                     xb = 'fe'   //女性
                 } else {
@@ -149,13 +184,18 @@ $(function() {
                     dzclass = '';
                     dzimg = 'img/topic-like-icon@2x.png';                                        
                 }
-                html += '<div class="person"><div class="user_head"><img src="'+respond.data[i].headImg+'"></div><div class="zl"><div class="xq"><p class="username">'+respond.data[i].nickName+'</p><p class="xz"><img src="img/topic-'+xb+'male-icon@2x.png" alt=""><span class="user_xz">'+getXz(respond.data[i].signs)+'</span></p></div><div class="time"><span>'+getDateDiff(getDateTimeStamp(respond.data[i].buildDate))+'</span></div><div class="none"></div> <div class="tp">投票给：相似更好，因为可以更好地理解对方</div> <div class="gd">'+respond.data[i].viewpoint+'</div><div class="dz"><img src="'+dzimg+'" alt="" class="dz_icon"><span class="dz_count '+dzclass+'">'+respond.data[i].zan+'</span></div><div class="hf"><img src="img/topic-talking-icon@2x.png" alt="" class="hf_icon"><span class="hf_count">'+hf+'</span></div>'+hf_more+'</div></div><hr size="1" style="opacity:0.3"/>'
+                // console.log(getDateDiff(getDateTimeStamp(respond.data[i].buildDate)))
+                html += '<div class="person"><div class="user_head"><img src="'+respond.data[i].headImg+'"></div><div class="zl"><div class="xq"><p class="username">'+respond.data[i].nickName+'</p><p class="xz"><img src="img/topic-'+xb+'male-icon@2x.png" alt=""><span class="user_xz">'+getXz(respond.data[i].signs)+'</span></p></div><div class="time"><span>'+getDateDiff(getDateTimeStamp(respond.data[i].buildDate))+'</span></div><div class="none"></div>'+option+'<div class="gd">'+respond.data[i].viewpoint+'</div><div class="dz"><img src="'+dzimg+'" alt="" class="dz_icon"><span class="dz_count '+dzclass+'">'+respond.data[i].zan+'</span></div><div class="hf"><img src="img/topic-talking-icon@2x.png" alt="" class="hf_icon"><span class="hf_count">'+hf+'</span></div>'+hf_more+'</div></div><hr size="1" style="opacity:0.3"/>'
                 
             };
             $('.content').append(html); 
             $('.content').find('hr').eq($('.person').length - 1).remove();
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            alert(textStatus);
         }
     })
+    
    
     // $('.more').on('touchstart',function() {
     //     $('.content').append('<hr size="1" style="opacity:0.3"/>');
