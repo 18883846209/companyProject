@@ -346,23 +346,23 @@ body {
 .tp {
     color:rgb(255, 130, 130);
     margin:10px 0 10px;
-    text-overflow: -o-ellipsis-lastline;  
+    /* text-overflow: -o-ellipsis-lastline;  
     overflow: hidden;  
     text-overflow: ellipsis;  
     display: -webkit-box;  
     -webkit-line-clamp: 1;  
-    -webkit-box-orient: vertical;   
+    -webkit-box-orient: vertical;    */
     font-size: 15px;
 }
 .tp_blue {
     color:rgb(86, 150, 223);
     margin:10px 0 10px;
-    text-overflow: -o-ellipsis-lastline;  
+    /* text-overflow: -o-ellipsis-lastline;  
     overflow: hidden;  
     text-overflow: ellipsis;  
     display: -webkit-box;  
     -webkit-line-clamp: 1;  
-    -webkit-box-orient: vertical;   
+    -webkit-box-orient: vertical;    */
     font-size: 15px;
 }
 .content .gd {
@@ -435,62 +435,9 @@ body {
     bottom: 0;
     left: 0;
     width: 100%;
-    /* max-width: 375px; */
     height: 64px;
-    background-color: rgba(255,255,255,0.95);
-    box-shadow: 0 1px 0 rgba(0,0,0,0.1);
     z-index: 100;
-    /* display: none; */
+    background: url('img/download-pic@3x.jpg') no-repeat;
 }   
-.llslogo {
-    position: absolute;
-    left: 30px;
-    top: 10px;
-    width: 44px;
-    height: 44px;
-    border: 1px solid transparent;
-    border-radius: 8px;
-    background: url('img/iPhone app-60@2x.png') no-repeat;
-    background-size: 44px 44px;
-    background-position: 50% 50%;
-}   
-.lls {
-    display: inline-block;
-    margin-top: 14px;
-    margin-left: 84px;
-}
-.lls .title{
-    font-family:PingFangSC-Regular;
-    font-size:15px;
-    color:#111111;
-    line-height:18px;
-    text-align:left;
-    font-weight: bold;
-}
-.lls .des1{
-    margin-top: 1px;
-    margin-left: -2px;
-    font-family:PingFangSC-Regular;
-    font-size:12px;
-    color:#333333;
-    line-height:18px;
-    text-align:left;
-}
-.downloadBtn{
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    margin-top: -13px;
-    display: block;
-    border:1px solid #2ea9df;
-    border-radius:3px;
-    width:68px;
-    height:24px;
-    font-family:PingFangSC-Regular;
-    font-size:14px;
-    color:#2ea9df;
-    line-height:24px;
-    text-align:center;
-    text-decoration: none;
-}
+
 
