@@ -1,9 +1,3 @@
-window.share = {
-    title: '邀请参与话题讨论',
-    desc: localStorage.getItem('title'),
-    link: 'http://192.168.1.110:8787/topic/index.html?share=1',
-    imgUrl: 'http://192.168.1.110:8787/topic/img/share.png'
-};
 function getQueryString(name) {
 	var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
 	var r = window.location.search.substr(1).match(reg);
@@ -22,7 +16,7 @@ function getQueryString(name) {
 	return null;
 }
 
-//时间转换
+//时间戳转换
 function getDateDiff(dateTimeStamp){
 	var minute = 1000 * 60;
 	var hour = minute * 60;
@@ -41,9 +35,9 @@ function getDateDiff(dateTimeStamp){
 	if(monthC>=1){
 		result="" + parseInt(monthC) + "月前";
 	}
-	else if(weekC>=1){
-		result="" + parseInt(weekC) + "周前";
-	}
+	// else if(weekC>=1){
+	// 	result="" + parseInt(weekC) + "周前";
+	// }
 	else if(dayC>=1){
 		result=""+ parseInt(dayC) +"天前";
 	}
@@ -65,90 +59,81 @@ function getDateTimeStamp(dateStr){
 $(function() {
     FastClick.attach(document.body);
     var ua=navigator.userAgent.toLocaleLowerCase();
-    var wnl=ua.indexOf("wnl")>-1;
+    // var wnl=ua.indexOf("wnl")>-1;
     var wx=ua.indexOf("micromessenger")>-1;
     var isIOSPhone=ua.indexOf("iphone")>-1||ua.indexOf("ipod")>-1;
     var isIOS=isIOSPhone||ua.indexOf("ipad")>-1;
     var isAndroid=ua.indexOf("android")>-1;
     var isWP=ua.indexOf("windows phone")>-1;
-    if(wx) {
-        $('.llsBanner').show()
-    } else {
-        $('.llsBanner').hide()        
-    }
-    $('.downloadBtn').click(function() {
-        if(isAndroid) {
-            location.href = 'https://qiniu.image.cq-wnl.com/lilith/download/android.apk'
+    
+    // function android(){
+    //     window.location.href = "arouter://m.youloft.com/ui/mainactivity"; 
+    //     window.setTimeout(function(){
+    //        window.location.href = "https://qiniu.image.cq-wnl.com/lilith/download/android.apk?v=201708161443";
+    //     },1000)
+    // };
+    // function ios(){
+    //     var ifr = document.createElement("iframe");
+    //     ifr.src = "lilith://"; 
+    //     ifr.style.display = "none"; 
+    //     document.body.appendChild(ifr);
+    //     window.setTimeout(function(){
+    //     document.body.removeChild(ifr);
+    //         window.location.href = "https://itunes.apple.com/cn/app/id1261255522?mt=8"; 
+    //     },1000)
+    // }; 
+    $('.llsBanner').click(function() {
+        loadSchema('lilith')
+    })
+    
+    var jl = $('.v').width() - 140,tid = getQueryString('tid');
+    
+    //请求观点详情数据
+    $.ajax({
+        url:'http://lilith.51wnl.com/GetTopicsInfo?tid='+tid+'&cid='+getQueryString('cid')+'&tkn='+getQueryString('tkn')+'  ',
+        // url:'http://lilith.51wnl.com/GetTopicsInfo?tid=10024&limit=15&skip=0&cid=Youloft_IOS&tkn=6480F2A608958030D190E9E62590174A',
+        type:'get',
+        success: function(respond) {
+            var text1 = respond.data.option[0].title,text2 = respond.data.option[1].title;
+            var sum1 = respond.data.option[0].vote,sum2 = respond.data.option[1].vote;
+            $('.xs').html(respond.data.option[0].shortTitle);
+            $('.hb').html(respond.data.option[1].shortTitle);            
+            $('.problem').css('background','url(' +respond.data.backImg+')');
+            // $('.problem').find('p').html('#爱情，应该是互补还是相似的两个人在一起呢?');
+            $('.problem').find('p').html(respond.data.title); 
+            // sessionStorage.setItem('title',respond.data.title);           
+            $('.change .right1, .change .right').css('width',sum2*jl/(sum1 + sum2));
+            // $('.change .right').css('width',sum2*jl/(sum1 + sum2));
+            
+            $('.left').animate({
+                width: sum1*jl/(sum1 + sum2) + 'px'
+            },1000);
+            $('.right1').animate({
+                width: 0
+            },1000);
+            console.log(text1);
+            console.log(text2);            
+            sessionStorage.setItem('t1',text1);
+            sessionStorage.setItem('t2',text2);
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert(textStatus);
         }
     })
-    window.appCallback_share = function () {
-                    var textObj = {
-                        text:share.desc,
-                        pureText:share.title,                                        
-                        url: share.url,
-                        image:"0",
-                        prefix: ''
-                    };
-                    var textObj1 = {
-                        title:share.title,
-                        text:share.desc,
-                        targetUrl: share.url,
-                        image:"0",                    
-                        prefix: ''
-                    };
-                    try {
-                        if (window.ylwindow) {
-                            ylwindow.reportHasShare(true);
-                            location.href = 'protocol://share:' + encodeURI(JSON.stringify(textObj1));
-                        }
-                        else {
-                            location.href = 'protocol://share#' + encodeURI(JSON.stringify(textObj));
-                        }
-                    }
-                    catch (e) { }
-                    return 1;
-                };
-        var jl = $('.v').width() - 140,tid = getQueryString('tid');
-        $.ajax({
-            url:'http://lilith.51wnl.com/GetTopicsInfo?tid='+tid+'&cid='+getQueryString('cid')+'&tkn='+getQueryString('tkn')+'',
-            type:'get',
-            success: function(respond) {
-                var text1 = respond.data.option[0].title,text2 = respond.data.option[1].title;
-                var sum1 = respond.data.option[0].vote,sum2 = respond.data.option[1].vote;
-                $('.xs').html(respond.data.option[0].shortTitle);
-                $('.hb').html(respond.data.option[1].shortTitle);            
-                $('.problem').css('background','url(' +respond.data.backImg+')');
-                // $('.problem').find('p').html('#爱情，应该是互补还是相似的两个人在一起呢?');
-                $('.problem').find('p').html(respond.data.title); 
-                localStorage.setItem('title',respond.data.title);           
-                $('.change .right1').css('width',sum2*jl/(sum1 + sum2));
-                $('.change .right').css({'backgroundColor':'rgb(27,170,169)','width':sum2*jl/(sum1 + sum2)});
-                
-                $('.left').animate({
-                    width: sum1*jl/(sum1 + sum2) + 'px'
-                },1000);
-                $('.right1').animate({
-                    width: 0
-                },1000);
-                console.log(text1);
-                localStorage.setItem('t1',text1);
-                localStorage.setItem('t2',text2);
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    alert(textStatus);
-                    }
-        })
 
+
+    //请求用户观点列表数据
     $.ajax({
         url:'http://lilith.51wnl.com/GetVoteList?tid='+tid+'&cid='+getQueryString('cid')+'&tkn='+getQueryString('tkn')+'  ',
+        // url:'http://lilith.51wnl.com/GetVoteList?tid=10024&skip=0&cid=Youloft_IOS&tkn=6480F2A608958030D190E9E62590174A',
         type:'get',
         success:function(respond) {
-            var html = '',xb = '',xz='',hf = '',hf_more = '',dzclass = '',dzimg = '',option = '';
+            var html = '',xb = '',xz='',hf = '',hf_more = '',dzclass = '',dzimg = '',option = '',headimg = '';
             for (let i = 0; i < respond.data.length; i ++) {
                 if(respond.data[i].topicOptionId%2 == 0) {
-                    option = '<div class="tp_blue">投票给：'+localStorage.getItem('t1')+'</div>';
+                    option = '<div class="tp_blue">投票给：'+sessionStorage.getItem('t1')+'</div>';  //支持观点
                 } else {
-                    option = '<div class="tp">投票给：'+localStorage.getItem('t2')+'</div>';
+                    option = '<div class="tp">投票给：'+sessionStorage.getItem('t2')+'</div>'; //反对观点
                 };                
                 if(respond.data[i].sex == '1') {
                     xb = 'fe'   //女性
@@ -225,8 +210,12 @@ $(function() {
                     dzimg = 'img/topic-like-icon@2x.png';                                        
                 }
                 // console.log(getDateDiff(getDateTimeStamp(respond.data[i].buildDate)))
-                html += '<div class="person"><div class="user_head"><img src="'+respond.data[i].headImg+'"></div><div class="zl"><div class="xq"><p class="username">'+respond.data[i].nickName+'</p><p class="xz"><img src="img/topic-'+xb+'male-icon@2x.png" alt=""><span class="user_xz">'+getXz(respond.data[i].signs)+'</span></p></div><div class="time"><span>'+getDateDiff(getDateTimeStamp(respond.data[i].buildDate))+'</span></div><div class="none"></div>'+option+'<div class="gd">'+respond.data[i].viewpoint+'</div><div class="dz"><img src="'+dzimg+'" alt="" class="dz_icon"><span class="dz_count '+dzclass+'">'+respond.data[i].zan+'</span></div><div class="hf"><img src="img/topic-talking-icon@2x.png" alt="" class="hf_icon"><span class="hf_count">'+hf+'</span></div>'+hf_more+'</div></div><hr size="1" style="opacity:0.3"/>'
-                
+                if(respond.data[i].headImg == '') {
+                    headimg = './img/morentouxiang-icon@2x.png';
+                } else {
+                    headimg = respond.data[i].headImg;
+                }
+                html += '<div class="person"><div class="user_head"><img src="'+headimg+'"></div><div class="zl"><div class="xq"><p class="username">'+respond.data[i].nickName+'</p><p class="xz"><img src="img/topic-'+xb+'male-icon@2x.png" alt=""><span class="user_xz">'+getXz(respond.data[i].signs)+'</span></p></div><div class="time"><span>'+getDateDiff(getDateTimeStamp(respond.data[i].buildDate))+'</span></div><div class="none"></div>'+option+'<div class="gd">'+respond.data[i].viewpoint+'</div><div class="dz"><img src="'+dzimg+'" alt="" class="dz_icon"><span class="dz_count '+dzclass+'">'+respond.data[i].zan+'</span></div><div class="hf"><img src="img/topic-talking-icon@2x.png" alt="" class="hf_icon"><span class="hf_count">'+hf+'</span></div>'+hf_more+'</div></div><hr size="1" style="opacity:0.3"/>'
             };
             $('.content').append(html); 
             $('.content').find('hr').eq($('.person').length - 1).remove();
