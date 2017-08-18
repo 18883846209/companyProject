@@ -3,7 +3,6 @@ div,a,img {
     /* -webkit-touch-callout: none; */
     /* -webkit-user-select: none; */
     /* user-select:none; */
-    user-select: text;
 }
 * {
     margin: 0;
@@ -28,6 +27,11 @@ body {
     width: 100%;
     background-color: rgb(41 33 66);
     color: white;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
 }
 .app_icon {
     width: 80px;
@@ -37,15 +41,20 @@ body {
     border-radius: 50%;
     background: url('img/iPhone spotlight-40@2x.png');
     background-position: 50% 50%;
-    background-size: 80px 80px;
+    /* background-size: 80px 80px; */
 }
 .version {
     font-size: 15px;
     text-align: center;
 }
 .contact {
-    margin-left: 49px;
+    margin-left: 1.83rem; 
     margin-top: 61px;
+    user-select: text;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    -o-user-select: text;
 }
 .contact .wx {
     height: 21px;
@@ -96,17 +105,13 @@ body {
 }
 .foot .company {
     opacity: .7;
-    margin-left: 2rem;
+    margin-left: 2.08rem;
 }
 .foot .copyright {
     font-size: 11px;
     margin-top: 10px;
     opacity: .24;
 }
-
-
-
-
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2),
 only screen and (-o-min-device-pixel-ratio: 4/2),
@@ -132,19 +137,54 @@ only screen and (min-device-pixel-ratio: 2) {
 only screen and (-o-min-device-pixel-ratio: 6/2),
 only screen and (min--moz-device-pixel-ratio: 3),
 only screen and (min-device-pixel-ratio: 3) {
-    .wx {
-        background: url('img/share-wxhy-icon@3x.png') no-repeat;         
+    .contact .wx {
+        background: url('img/share-wxhy-icon@3x.png') no-repeat;   
+        background-position: 0 50%;    
+        background-size: 15px 15px;    
     }
-    .wb {
-        background: url('img/share-sina-icon@3x.png') no-repeat;                
+    .contact .wb {
+        background: url('img/share-sina-icon@3x.png') no-repeat;  
+        background-position: 0 50%;  
+        background-size: 15px 15px;            
     }
-    .yx {
-        background: url('img/share-mail-icon@3x.png') no-repeat;                 
+    .contact .yx {
+        background: url('img/share-mail-icon@3x.png') no-repeat;  
+        background-position: 0 50%;     
+        background-size: 15px 15px;            
     }
-    .qq {
-        background: url('img/share-qq-icon@3x.png') no-repeat;                 
+    .contact .qq {
+        background: url('img/share-qq-icon@3x.png') no-repeat;   
+        background-position: 0 50%;   
+        background-size: 15px 15px;            
     }
-    /* .app_icon {
+    .app_icon {
         background: url('img/iPhone spotlight-40@3x.png');
-    } */
+        background-position: 50% 50%;   
+        background-size: 80px 80px;    
+    }
+}
+@media only screen and (min-width:412px) {
+    .contact {
+        margin-left: 2.15rem; 
+    }
+    .foot .company {
+        margin-left: 2.18rem;
+    }
+}
+
+@media (device-height:568px) and (-webkit-min-device-pixel-ratio:2){/* 兼容iphone5 */
+    .contact {
+        margin-left: 1.55rem; 
+    }
+    .foot .company {
+        margin-left: 1.8rem;
+    }
+}
+@media (device-height:480px){/* 兼容iphone4s */
+    .contact {
+        margin-left: 1.6rem; 
+    }
+    .foot .company {
+        margin-left: 1.79rem;
+    }
 }
