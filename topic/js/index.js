@@ -58,53 +58,34 @@ function getDateTimeStamp(dateStr){
 
 $(function() {
     FastClick.attach(document.body);
-    var ua=navigator.userAgent.toLocaleLowerCase();
-    // var wnl=ua.indexOf("wnl")>-1;
-    var wx=ua.indexOf("micromessenger")>-1;
-    var isIOSPhone=ua.indexOf("iphone")>-1||ua.indexOf("ipod")>-1;
-    var isIOS=isIOSPhone||ua.indexOf("ipad")>-1;
-    var isAndroid=ua.indexOf("android")>-1;
-    var isWP=ua.indexOf("windows phone")>-1;
-    
-    // function android(){
-    //     window.location.href = "arouter://m.youloft.com/ui/mainactivity"; 
-    //     window.setTimeout(function(){
-    //        window.location.href = "https://qiniu.image.cq-wnl.com/lilith/download/android.apk?v=201708161443";
-    //     },1000)
-    // };
-    // function ios(){
-    //     var ifr = document.createElement("iframe");
-    //     ifr.src = "lilith://"; 
-    //     ifr.style.display = "none"; 
-    //     document.body.appendChild(ifr);
-    //     window.setTimeout(function(){
-    //     document.body.removeChild(ifr);
-    //         window.location.href = "https://itunes.apple.com/cn/app/id1261255522?mt=8"; 
-    //     },1000)
-    // }; 
-    $('.llsBanner').click(function() {
-        loadSchema('lilith')
-    })
+    _czc.push(['_trackEvent','Topicshare.C', 'click']); 
+    document.getElementById('llsBanner').onclick = function() {
+        loadSchema('https://qiniu.image.cq-wnl.com/lilith/download/android.apk?v=201708161443');        
+    }
     
     var jl = $('.v').width() - 140,tid = getQueryString('tid');
     
     //请求观点详情数据
     $.ajax({
-        url:'http://lilith.51wnl.com/GetTopicsInfo?tid='+tid+'&cid='+getQueryString('cid')+'&tkn='+getQueryString('tkn')+'  ',
-        // url:'http://lilith.51wnl.com/GetTopicsInfo?tid=10024&limit=15&skip=0&cid=Youloft_IOS&tkn=6480F2A608958030D190E9E62590174A',
+        url:(('https:' == document.location.protocol) ?  'https' :  'http')+'://lilith.51wnl.com/GetTopicsInfo?tid='+tid+'&uid='+getQueryString('uid')+'&cid='+getQueryString('cid')+'&tkn='+getQueryString('tkn')+'  ',
+        // url:(('https:' == document.location.protocol) ?  'https' :  'http')+'://lilith.51wnl.com/GetTopicsInfo?tid=10035&uid=10009&skip=0&cid=Youloft_IOS&tkn=6480F2A608958030D190E9E62590174A',
         type:'get',
         success: function(respond) {
             var text1 = respond.data.option[0].title,text2 = respond.data.option[1].title;
             var sum1 = respond.data.option[0].vote,sum2 = respond.data.option[1].vote;
+            var problem = $('.problem');
             $('.xs').html(respond.data.option[0].shortTitle);
-            $('.hb').html(respond.data.option[1].shortTitle);            
-            $('.problem').css('background','url(' +respond.data.backImg+')');
-            // $('.problem').find('p').html('#爱情，应该是互补还是相似的两个人在一起呢?');
-            $('.problem').find('p').html(respond.data.title); 
+            $('.hb').html(respond.data.option[1].shortTitle);
+            console.log(respond.data.backImg);
+            // problem.css('flter','blur(10px)');          
+            // problem.css('background','url(' +respond.data.backImg+')');
+            problem.find('img').attr('src',respond.data.backImg);
+            // problem.find('p').html('#爱情，应该是互补还是相似的两个人在一起呢?');
+            problem.find('p').html(respond.data.title); 
             // sessionStorage.setItem('title',respond.data.title);           
             $('.change .right1, .change .right').css('width',sum2*jl/(sum1 + sum2));
-            // $('.change .right').css('width',sum2*jl/(sum1 + sum2));
             
+            //投票比例显示动画
             $('.left').animate({
                 width: sum1*jl/(sum1 + sum2) + 'px'
             },1000);
@@ -118,14 +99,15 @@ $(function() {
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
                 alert(textStatus);
-        }
+        },
+        async:false
     })
 
 
     //请求用户观点列表数据
     $.ajax({
-        url:'http://lilith.51wnl.com/GetVoteList?tid='+tid+'&cid='+getQueryString('cid')+'&tkn='+getQueryString('tkn')+'  ',
-        // url:'http://lilith.51wnl.com/GetVoteList?tid=10024&skip=0&cid=Youloft_IOS&tkn=6480F2A608958030D190E9E62590174A',
+        url:(('https:' == document.location.protocol) ?  'https' :  'http')+'://lilith.51wnl.com/GetVoteList?tid='+tid+'&cid='+getQueryString('cid')+'&uid='+getQueryString('uid')+'&tkn='+getQueryString('tkn')+'  ',
+        // url:(('https:' == document.location.protocol) ?  'https' :  'http')+'://lilith.51wnl.com/GetVoteList?tid=10024&skip=0&uid=10009&cid=Youloft_IOS&tkn=6480F2A608958030D190E9E62590174A',
         type:'get',
         success:function(respond) {
             var html = '',xb = '',xz='',hf = '',hf_more = '',dzclass = '',dzimg = '',option = '',headimg = '';
@@ -202,7 +184,7 @@ $(function() {
                     hf_more = '<div class="pl"><p>' + respond.data[i].replyList[0].nickName+':'+respond.data[i].replyList[0].contents + '</p>' + '<p>' + respond.data[i].replyList[1].nickName+':'+respond.data[i].replyList[1].contents + '</p>' + '<p>' + respond.data[i].replyList[2].nickName+':'+respond.data[i].replyList[2].contents + '</p>' + '<p>查看全部评论' + respond.data[i].reply + '条</p></div>';
                     
                 }
-                if(respond.data[i].zan > 0) {
+                if(respond.data[i].isclick == '1') {
                     dzclass = 'dzchange';
                     dzimg = 'img/topic-liking-icon@2x.png';
                 } else {
@@ -224,6 +206,7 @@ $(function() {
             alert(textStatus);
         }
     })
+    
     
 })    
    

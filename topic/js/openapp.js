@@ -34,13 +34,17 @@ var browser = {
 };
 var loadTimer = null;
 /*
-	schema: 打开万年历的schema 具体见http://www.51wnl.com/openwnl/intent.html 如打开一个网页：ylweb?url=https://beta.bugly.qq.com/jhmf   打开月视图：maintab?index=0
 	apkLink：可选，安卓apk下载地址，不传则应用宝微下载
  */
-function loadSchema(schema, apkLink) {
-	var iosSchema = 'http://jptjios.51wnl.com/app/' + schema;	
-	var wxAppLink = 'http://a.app.qq.com/o/simple.jsp?pkgname=m.youloft.com/ui/mainactivity&android_schema=youloft419805549://' + schema;
-	var loadWating = 3000;
+function loadSchema(apkLink) {
+	// var iosSchema;
+	// if(schema = '') {
+	// 	iosSchema = 'https://jptjios.51wnl.com/lilith';  	
+	// }
+	var iosSchema = 'http://jptjios.51wnl.com/lilith';  	
+	var wxAppLink = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.youloft.lilith&android_schema=' + azAppLink;//应用宝中app的链接
+	var azAppLink = 'arouter://m.youloft.com/ui/mainactivity';
+	var loadWating = 1000;
 	var iframe = document.createElement('iframe'),
 		aLink = document.createElement('a'),
 		body = document.body;
@@ -51,17 +55,17 @@ function loadSchema(schema, apkLink) {
 			window.location.href = wxAppLink;
 		}
 		else {
-			aLink.href = 'youloft419805549://' + schema;
+			aLink.href = azAppLink;
 		}
-	}
-	else if (browser.isIOS()) {
+	}else if (browser.isIOS()) {
 		if (browser.getIOSVersion() < 9) {
-			location.href = wxAppLink;
+			window.location.href = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.youloft.lilith';
 			return;
 		}
 		aLink.href = iosSchema;
 	}
 	body.appendChild(aLink);
+	console.log(aLink);
 	aLink.click();
 	// 如果LOAD_WAITING时间后,还是无法唤醒app，则直接打开下载页
 	// opera 无效
@@ -80,19 +84,20 @@ function loadSchema(schema, apkLink) {
 		else {
 			if (browser.isAndroid()) {
 				if (browser.isWx()) {
-					window.location.href = wxAppLink;
+					window.location.href = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.youloft.lilith';
 				}
 				else {
 					window.location.href = apkLink && apkLink.length !== 0 ? apkLink : wxAppLink;
 				}
 			}
 			else if (browser.isIOS()) {
-				window.location.href = wxAppLink;
+				// window.location.href = wxAppLink;
+				window.location.href = 'https://itunes.apple.com/cn/app/id1261255522?mt=8';
 			}
 		}
 	}, loadWating);
-	// 当本地app被唤起，则页面会隐藏掉，就会触发pagehide与visibilitychange事件
-	// 在部分浏览器中可行，网上提供方案，作hack处理
+	//当本地app被唤起，则页面会隐藏掉，就会触发pagehide与visibilitychange事件
+	//在部分浏览器中可行，网上提供方案，作hack处理
 	var visibilitychange = function () {
 		var tag = document.hidden || document.webkitHidden;
 		tag && clearTimeout(loadTimer);
