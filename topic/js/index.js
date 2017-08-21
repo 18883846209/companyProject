@@ -67,8 +67,8 @@ $(function() {
     
     //请求观点详情数据
     $.ajax({
-        url:(('https:' == document.location.protocol) ?  'https' :  'http')+'://lilith.51wnl.com/GetTopicsInfo?tid='+tid+'&uid='+getQueryString('uid')+'&cid='+getQueryString('cid')+'&tkn='+getQueryString('tkn')+'  ',
-        // url:(('https:' == document.location.protocol) ?  'https' :  'http')+'://lilith.51wnl.com/GetTopicsInfo?tid=10035&uid=10009&skip=0&cid=Youloft_IOS&tkn=6480F2A608958030D190E9E62590174A',
+        // url:(('https:' == document.location.protocol) ?  'https' :  'http')+'://lilith.51wnl.com/GetTopicsInfo?tid='+tid+'&uid='+getQueryString('uid')+'&cid='+getQueryString('cid')+'&tkn='+getQueryString('tkn')+'  ',
+        url:(('https:' == document.location.protocol) ?  'https' :  'http')+'://lilith.51wnl.com/GetTopicsInfo?tid=10007&uid=10009&skip=0&cid=Youloft_IOS&tkn=6480F2A608958030D190E9E62590174A',
         type:'get',
         success: function(respond) {
             var text1 = respond.data.option[0].title,text2 = respond.data.option[1].title;
@@ -106,8 +106,8 @@ $(function() {
 
     //请求用户观点列表数据
     $.ajax({
-        url:(('https:' == document.location.protocol) ?  'https' :  'http')+'://lilith.51wnl.com/GetVoteList?tid='+tid+'&cid='+getQueryString('cid')+'&uid='+getQueryString('uid')+'&tkn='+getQueryString('tkn')+'  ',
-        // url:(('https:' == document.location.protocol) ?  'https' :  'http')+'://lilith.51wnl.com/GetVoteList?tid=10024&skip=0&uid=10009&cid=Youloft_IOS&tkn=6480F2A608958030D190E9E62590174A',
+        // url:(('https:' == document.location.protocol) ?  'https' :  'http')+'://lilith.51wnl.com/GetVoteList?tid='+tid+'&cid='+getQueryString('cid')+'&uid='+getQueryString('uid')+'&tkn='+getQueryString('tkn')+'  ',
+        url:(('https:' == document.location.protocol) ?  'https' :  'http')+'://lilith.51wnl.com/GetVoteList?tid=10007&skip=0&uid=10009&cid=Youloft_IOS&tkn=6480F2A608958030D190E9E62590174A',
         type:'get',
         success:function(respond) {
             var html = '',xb = '',xz='',hf = '',hf_more = '',dzclass = '',dzimg = '',option = '',headimg = '';

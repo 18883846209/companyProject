@@ -14,15 +14,19 @@
     <script src="js/jquery.min.js"></script>
 </head>
 <body>
-    <!-- <a href="http://jptjios.51wnl.com/lilith">打开莉莉丝</a> -->
-    <div class="img"></div>
+    <!-- <a href="http://jptjios.51wnl.com/lilith" style="display:block;margin-top:80px">打开莉莉丝(ios)</a> -->
+    <a href="http://www.baidu.com" style="display:block;margin-top:80px">打开百度</a>
+    
+    <!-- <a href="arouter://m.youloft.com/ui/mainactivity">打开莉莉丝(安卓)</a>     -->
+    <!-- <div class="img"></div> -->
     <script>
-        var img = document.createElement('img');
-        img.style.cssText = 'display:none';
-        document.body.appendChild(img);
-        img.src = 'https://qiniu.image.cq-wnl.com/androidbanner201707241140306251';
-        img.cssText = 'filter:blur(10px)';
-        $('.img').css('background','url('+img.src+')');
+        // var img = document.createElement('img');
+        // img.style.cssText = 'display:none';
+        // document.body.appendChild(img);
+        // img.src = 'https://qiniu.image.cq-wnl.com/androidbanner201707241140306251';
+        // img.cssText = 'filter:blur(10px)';
+        // $('.img').css('background','url('+img.src+')');
+        document.getElementsByTagName('a')[0].click();
     </script>
 </body>
 </html>
