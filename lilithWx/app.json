@@ -1,0 +1,32 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/login/login",    
+    "pages/logs/logs"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#2e2b3f",
+    "navigationBarTitleText": "莉莉斯",
+    "navigationBarTextStyle":"rgb(255,255,255)"
+  },
+  "tabBar": {
+    "backgroundColor": "#282142",
+    "selectedColor": "#de5deb",
+    "color": "rgb(255,255,255)",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "pages/img/tab-constellation-icon2-lion.png",
+        "selectedIconPath": "pages/img/tab-constellation-icon-lion.png",
+        "text": "星座"
+      },
+      {
+        "pagePath": "pages/logs/logs",
+        "iconPath": "pages/img/tab-mine-icon2@2x.png",
+        "selectedIconPath": "pages/img/tab-mine-icon@2x.png",
+        "text": "我"
+      }
+    ]
+  }
+}

@@ -1,0 +1,124 @@
+<view class="container">
+  <view class="top">
+    <image src="../img/tl_bg.jpg" class="img"></image>
+    <view class="desc" wx:if="false">
+      <view class="text text1">每日塔罗</view>
+      <view class="text text2">你今日的专属塔罗提示！</view>
+      <view class="text text3">点击获取</view>      
+    </view>
+    <view class="desc1" hidden="true" wx:if="true">
+      <view class="text text1">牌名: 骑士</view>
+      <view class="text text2">关键词： 纯真、信任、接纳</view>
+      <view class="text text3">星座： 巨蟹座</view>   
+      <view class="text text4">元素： 风</view>   
+      <image src="../img/more@2x.png" class="more"></image>                  
+    </view>
+  </view>
+
+  <view class="getluck">
+
+    <view class="person">
+      <view class="tip">{{hello}}{{username}}，请您完善资料获取准确运势</view>
+      <view class="date">{{t}}</view>
+      <view class="weekday">{{week}}</view>
+      <view class="xz">
+        <view class="xz_name">狮子座</view>
+        <view class="xz_date">10.23-11.22</view>        
+      </view>
+      <view class="xz_desc">这里是描述这里是描述这里是描述这里是描述这里是描述这里是描述这里是描述</view>
+      <view class="line"></view>
+      <view class="zs">
+        <view class="same gq">
+          <view class="gq_name">感情指数</view>
+          <view class="pic gq_zs">
+            <image src="../img/calendar-love-s-icon@2x.png" class="photo gq1"></image>
+            <image src="../img/calendar-love-s-icon@2x.png" class="photo gq2"></image>
+            <image src="../img/calendar-love-s-icon@2x.png" class="photo gq3"></image>
+            <image src="../img/calendar-love-s2-icon@2x.png" class="photo gq4"></image>
+            <image src="../img/calendar-love-s2-icon@2x.png" class="photo gq5"></image>            
+          </view>          
+        </view>
+        <view class="same cf">
+          <view class="cf_name">财富指数</view>
+          <view class="pic cf_zs">
+            <image src="../img/calendar-money-s-icon@2x.png" class="photo cf1"></image>
+            <image src="../img/calendar-money-s-icon@2x.png" class="photo cf2"></image>
+            <image src="../img/calendar-money-s-icon@2x.png" class="photo cf3"></image>
+            <image src="../img/calendar-money-s-icon@2x.png" class="photo cf4"></image>
+            <image src="../img/calendar-money-s2-icon@2x.png" class="photo cf5"></image>
+          </view> 
+        </view>
+        <view class="same gz">
+          <view class="gz_name">工作指数</view>
+          <view class="pic gz_zs">
+            <image src="../img/calendar-work-s-icon@2x.png" class="photo gz1"></image>
+            <image src="../img/calendar-work-s-icon@2x.png" class="photo gz2"></image>
+            <image src="../img/calendar-work-s-icon@2x.png" class="photo gz3"></image>
+            <image src="../img/calendar-work-s2-icon@2x.png" class="photo gz4"></image>
+            <image src="../img/calendar-work-s2-icon@2x.png" class="photo gz5"></image>
+          </view> 
+        </view>       
+      </view>
+    </view>
+
+    <view class="goodluck">
+        <view class="sevenluck">7天佳运预览</view>
+        <view class="day">
+          <view class="data d1">
+            <view class="dayluck">
+               <image src="../img/calendar-love-s-icon@3x.png" class="pp1"></image> 
+               <image src="../img/calendar-money-s-icon@3x.png" class="pp2"></image>
+               <image src="../img/calendar-work-s-icon@3x.png" class="pp3"></image>                                             
+            </view>
+            <view class="daytime">今天</view>
+          </view>
+          <view class="data d2">
+            <view class="dayluck">
+               <image src="../img/calendar-love-s-icon@3x.png" class="pp1"></image> 
+               <image src="../img/calendar-money-s-icon@3x.png" class="pp2"></image>               
+            </view>
+            <view class="daytime">明天</view>
+          </view>
+          <view class="data d3">
+            <view class="dayluck">
+               <image src="../img/calendar-love-s-icon@3x.png" class="pp1"></image> 
+               <image src="../img/calendar-money-s-icon@3x.png" class="pp2"></image>               
+            </view>
+            <view class="daytime">{{day3}}</view>
+          </view>
+          <view class="data d4">
+            <view class="dayluck">
+               <image src="../img/calendar-love-s-icon@3x.png" class="pp1"></image> 
+               <image src="../img/calendar-money-s-icon@3x.png" class="pp2"></image>               
+            </view>
+            <view class="daytime">{{day4}}</view>
+          </view>
+          <view class="data d5">
+            <view class="dayluck">
+               <image src="../img/calendar-love-s-icon@3x.png" class="pp1"></image> 
+               <image src="../img/calendar-money-s-icon@3x.png" class="pp2"></image>               
+            </view>
+            <view class="daytime">{{day5}}</view>
+          </view>
+          <view class="data d6">
+            <view class="dayluck">
+               <image src="../img/calendar-love-s-icon@3x.png" class="pp1"></image> 
+               <image src="../img/calendar-money-s-icon@3x.png" class="pp2"></image>               
+            </view>
+            <view class="daytime">{{day6}}</view>
+          </view>
+          <view class="data d7">
+            <view class="dayluck">
+               <image src="../img/calendar-love-s-icon@3x.png" class="pp1"></image> 
+               <image src="../img/calendar-money-s-icon@3x.png" class="pp2"></image>               
+            </view>
+            <view class="daytime">{{day7}}</view>
+          </view>          
+        </view>
+    </view> 
+
+    <view class="luckscan">
+      <view class="lucky">运势概括</view>
+    </view>
+  </view>
+</view>
